@@ -1,27 +1,31 @@
-# makeideploy.today
+# makeideploy.today [site]
 
-[![FOSSA Status](to be added)](https://app.fossa.io/projects/#)
+We just want make you know say we no de joke. 
+I know say some of una people dey think say we dey joke but we dey serious.
+
+FOSSA Status - [fossa-url]
+FOSSA Badge - [fossa-badge]
 
 ## Getting started
 
 * Run dis tin:
   * `npm i` — make dependencies enter.
   * `npm run dev` start dev server
-  * `now dev` if you wan use local serveless function (you go need "now")
+  * `now dev` if you want use local serveless function (you go need "now")
 
 ## Add your reasons
 
-Reasons dey for [reasons.ts](https://github.com/IamPrime/makeideploy/blob/master/helpers/reasons.ts)
+Reasons dey for [reasons.ts].
 
 ## API endpoint
 
-We get API wey you fit use for your CI or just for fun at `https://makeideploy.today/api`
+We get API wey you fit use for your CI or just for fun at [api-endpoint].
 
 You fit add some optional parameters wey go customize API response:
 
-* `tz`: Timezone wey you wan use. Put correct timezone string, like `Africa/Lagos` or `America/Chicago`. Default na `UTC`.
+* `tz`: Timezone wey you want use. Put correct timezone string, like `Africa/Lagos` or `America/Chicago`. Default na `UTC`.
 
-* `date`: Date wey you wan check. Default na today. Put correct date string for this format `YYYY-MM-DD`, like `2024-11-18`.
+* `date`: Date wey you want check. Default na today. Put correct date string for this format `YYYY-MM-DD`, like `2024-11-18`.
 
 ### Examples
 
@@ -71,8 +75,17 @@ Example response:
 
 ## Credits
 
-Favicon created by [emilegraphics](https://thenounproject.com/search/?q=dot&i=1359410)
+Favicon created by **emilegraphics** from the NOUN Project at [favicon-credit]
 
 ## License
 
-Go see am for package.json || WTFPL - Anything wey you wan do with this code, you fit do am.
+Abeg check am for [license-link] || WTFPL - You fit do anytin wey you want with dis code!
+
+* [site]: https://makeideploy.today
+* [fossa-badge]: We go put am
+* [fossa-url]: https://app.fossa.io/projects/#
+* [reasons.ts]: https://github.com/IamPrime/makeideploy/blob/master/helpers/reasons.ts
+* [api-endpoint]: https://makeideploy.today/api
+* [favicon-credit]: https://thenounproject.com/search/?q=dot&i=1359410
+* [license-link]: https://github.com/IamPrime/makeideploy/blob/master/LICENSE
+<!-- End of README.md -->
