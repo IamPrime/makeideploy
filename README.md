@@ -30,10 +30,10 @@ FOSSA Badge - [fossa-badge]
 
 ## Getting started
 
-* Run dis tin:
-  * `npm i` — make dependencies enter.
-  * `npm run dev` start dev server
-  * `now dev` if you want use local serveless function (you go need "now")
+- Run dis tin:
+  - `npm i` — make dependencies enter.
+  - `npm run dev` start dev server
+  - `now dev` if you want use local serveless function (you go need "now")
 
 ## Add your reasons
 
@@ -45,9 +45,9 @@ We get API wey you fit use for your CI or just for fun at [api-endpoint].
 
 You fit add some optional parameters wey go customize API response:
 
-* `tz`: Timezone wey you want use. Put correct timezone string, like `Africa/Lagos` or `America/Chicago`. Default na `UTC`.
+- `tz`: Timezone wey you want use. Put correct timezone string, like `Africa/Lagos` or `America/Chicago`. Default na `UTC`.
 
-* `date`: Date wey you want check. Default na today. Put correct date string for this format `YYYY-MM-DD`, like `2024-11-18`.
+- `date`: Date wey you want check. Default na today. Put correct date string for this format `YYYY-MM-DD`, like `2024-11-18`.
 
 ### Examples
 
@@ -79,10 +79,10 @@ https://makeideploy.today/api?tz=America/Chicago&date=2024-11-18
 
 The API go give you JSON object wey get these keys:
 
-* `timezone`: Timezone wey you give for the request.
-* `date`: Date wey you provide for ISO format (YYYY-MM-DDTHH:mm:ss.sssZ).
-* `makeideploy`: Boolean value wey go show if you suppose deploy today.
-* `message`: String/Message wey explain why you go or no go deploy.
+- `timezone`: Timezone wey you give for the request.
+- `date`: Date wey you provide for ISO format (YYYY-MM-DDTHH:mm:ss.sssZ).
+- `makeideploy`: Boolean value wey go show if you suppose deploy today.
+- `message`: String/Message wey explain why you go or no go deploy.
 
 Example response:
 
@@ -103,11 +103,11 @@ Favicon created by **emilegraphics** from the NOUN Project at [favicon-credit]
 
 Abeg check am for [license-link] || WTFPL - You fit do anytin wey you want with dis code!
 
-* [site]: https://makeideploy.today
-* [fossa-badge]: We go put am
-* [fossa-url]: https://app.fossa.io/projects/#
-* [reasons.ts]: https://github.com/IamPrime/makeideploy/blob/master/helpers/reasons.ts
-* [api-endpoint]: https://makeideploy.today/api
-* [favicon-credit]: https://thenounproject.com/search/?q=dot&i=1359410
-* [license-link]: https://github.com/IamPrime/makeideploy/blob/master/LICENSE
+- [site]: https://makeideploy.today
+- [fossa-badge]: We go put am
+- [fossa-url]: https://app.fossa.io/projects/#
+- [reasons.ts]: https://github.com/IamPrime/makeideploy/blob/master/helpers/reasons.ts
+- [api-endpoint]: https://makeideploy.today/api
+- [favicon-credit]: https://thenounproject.com/search/?q=dot&i=1359410
+- [license-link]: https://github.com/IamPrime/makeideploy/blob/master/LICENSE
 <!-- End of README.md -->
