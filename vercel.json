@@ -1,6 +1,6 @@
 {
   "name": "makeideploy",
-  "version": 1,
+  "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [

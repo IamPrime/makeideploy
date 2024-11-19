@@ -3,7 +3,7 @@
   "description": "Make I Deploy Today?",
   "author": "IamPrime and Ckabuo",
   "license": "WTFPL",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "repository": "https://github.com/IamPrime/makeideploy",
   "scripts": {
     "precommit": "NODE_ENV=production lint-staged",
