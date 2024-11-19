@@ -4,7 +4,7 @@ import {
   REASONS_TO_NOT_DEPLOY,
   REASONS_FOR_THURSDAY_AFTERNOON,
   REASONS_FOR_FRIDAY_AFTERNOON,
-  REASONS_FOR_FRIDAY_13TH,
+  REASONS_FOR_FRIDAY_22ND,
   REASONS_FOR_AFTERNOON,
   REASONS_FOR_WEEKEND,
   REASONS_FOR_DAY_BEFORE_CHRISTMAS,
@@ -32,10 +32,10 @@ export const shouldIDeploy = function (time: Time | null, date?: Date) {
   }
 
   return (
-    !time.isFriday() &&
-    !time.isWeekend() &&
-    !time.isHolidays() &&
-    !time.isAfternoon()
+    !time.naFriday() &&
+    !time.naWeekend() &&
+    !time.naHolidays() &&
+    !time.naAfternoon()
   )
 }
 
@@ -64,39 +64,39 @@ export const getRandom = function ranDay(list: string | string[]) {
 export function dayHelper(time: Time) {
   time = time || new Time(time)
 
-  if (time.isDayBeforeChristmas()) {
+  if (time.naChristmasEve()) {
     return REASONS_FOR_DAY_BEFORE_CHRISTMAS
   }
 
-  if (time.isChristmas()) {
+  if (time.naChristmas()) {
     return REASONS_FOR_CHRISTMAS
   }
 
-  if (time.isNewYear()) {
+  if (time.naNewYear()) {
     return REASONS_NEW_YEAR
   }
 
-  if (time.isFriday13th()) {
-    return REASONS_FOR_FRIDAY_13TH
+  if (time.naFriday22nd()) {
+    return REASONS_FOR_FRIDAY_22ND
   }
 
-  if (time.isFridayAfternoon()) {
+  if (time.naFridayAfternoon()) {
     return REASONS_FOR_FRIDAY_AFTERNOON
   }
 
-  if (time.isFriday()) {
+  if (time.naFriday()) {
     return REASONS_TO_NOT_DEPLOY
   }
 
-  if (time.isThursdayAfternoon()) {
+  if (time.naThursdayAfternoon()) {
     return REASONS_FOR_THURSDAY_AFTERNOON
   }
 
-  if (time.isWeekend()) {
+  if (time.naWeekend()) {
     return REASONS_FOR_WEEKEND
   }
 
-  if (time.isAfternoon()) {
+  if (time.naAfternoon()) {
     return REASONS_FOR_AFTERNOON
   }
 

@@ -1,19 +1,19 @@
-## Adding a New Test Case for Days
+# How to Add New Test Case for Days
 
-If you're introducing a new case to test for a day in the Time class, here are the steps to follow:
+If you wan add new case to test for day inside Time class, follow these steps wey I go tell you now-now:
 
-- First, navigate to the `days.test.ts` file located in the `tests` folder.
-- Copy one of the existing describe blocks that corresponds to the day you're testing for (e.g. `isThursday()`, `isFriday13th()`, etc.).
-- Paste the describe block into the file, and rename it to the day you're testing for.
-- Within the describe block, add a new it block to test your specific case.
-- In the `it` block, create a new `Date` object with the date and time you want to test.
-- Use `jest.spyOn(`) to mock the `now` function of the `Time` class and return the Date object you just created.
-- Call the method you're testing on the `time` object, and use `expect` to test whether the result is what you expect it to be.
-- Save the file, and run the tests to ensure everything is working as expected.
+- First-first, find that `days.test.ts` file wey dey inside `tests` folder.
+- Copy one of those describe blocks wey dey there already, the one wey match the day you wan test (like `isMonday()`, `isTuesday19th()`, and co).
+- Paste am for the file, then change the name to the day you dey test.
+- For inside the describe block, add new it block to test your own special case.
+- For the `it` block, create new `Date` object with the date and time wey you wan test.
+- Use `jest.spyOn()` to do as if you be the `now` function of the `Time` class, then return that Date object wey you just create.
+- Call the method wey you dey test on top the `time` object, then use `expect` to check if the result na wetin you dey expect.
+- Save the file, then run the tests to make sure say everything dey work as e suppose be.
 
-Here's an example of what your new `it` block might look like:
+This example go show you how new `it` block fit be:
 
-```
+```JavaScript
 it('returns true if it is a holiday', () => {
   const date = new Date('December 25, 2023 00:00:00')
   jest.spyOn(time, 'now').mockImplementation(() => date)
@@ -21,4 +21,6 @@ it('returns true if it is a holiday', () => {
 })
 ```
 
-And that's it! By following these steps, you can add new test cases to the `Time` class to ensure that it's working correctly for all days and times.
+Na so o! If you follow these steps, you go fit add new test cases to the `Time` class to make sure say e dey work well-well for all days and times.
+
+*Disclaimer: Dis text na AI generate am.*

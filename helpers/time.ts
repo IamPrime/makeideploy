@@ -40,7 +40,7 @@ export default class Time {
   }
 
   /**
-   * Check if a timezone exist
+   * Check if timezone dey exist
    * @param {string} timeZone
    * @return {bool}
    */
@@ -62,7 +62,7 @@ export default class Time {
   }
 
   /**
-   * Return current date
+   * Return the date wey dey now
    * @return {Date}
    */
   now(): Date {
@@ -76,74 +76,74 @@ export default class Time {
   }
 
   /**
-   * Today is Thursday
+   * Today na Thursday?
    * @return boolean
    */
-  isThursday(): boolean {
+  naThursday(): boolean {
     return this.getDate().getDay() === 4
   }
 
   /**
-   * Today is Friday
+   * Today na Friday?
    * @return boolean
    */
-  isFriday(): boolean {
+  naFriday(): boolean {
     return this.getDate().getDay() === 5
   }
 
   /**
-   * Today is day 13
+   * Today na day 22nd?
    * @return boolean
    */
-  is13th(): boolean {
-    return this.getDate().getDate() === 13
+  na22nd(): boolean {
+    return this.getDate().getDate() === 22
   }
 
   /**
-   * Are we in the afternoon?
+   * We dey for afternoon?
    * @return boolean
    */
-  isAfternoon(): boolean {
+  naAfternoon(): boolean {
     return this.getDate().getHours() >= 16
   }
 
   /**
-   * Are we Thursday afternoon?
+   * We dey Thursday afternoon?
    * @return boolean
    */
-  isThursdayAfternoon(): boolean {
-    return this.isThursday() && this.isAfternoon()
+  naThursdayAfternoon(): boolean {
+    return this.naThursday() && this.naAfternoon()
   }
 
   /**
-   * Are we Friday afternoon?
+   * We dey Friday afternoon?
    * @return boolean
    */
-  isFridayAfternoon(): boolean {
-    return this.isFriday() && this.isAfternoon()
+  naFridayAfternoon(): boolean {
+    return this.naFriday() && this.naAfternoon()
   }
 
   /**
-   * Are we Friday the 13th?
+   * Today na Friday wey be 22nd?
    * @return boolean
    */
-  isFriday13th(): boolean {
-    return this.isFriday() && this.is13th()
+  naFriday22nd(): boolean {
+    return this.naFriday() && this.na22nd()
   }
 
   /**
-   * Are we the weekend (Saturday, Sunday)
+   * We dey weekend (Saturday or Sunday)?
    * @return boolean
    */
-  isWeekend(): boolean {
+  naWeekend(): boolean {
     return this.getDate().getDay() === 6 || this.getDate().getDay() === 0
   }
 
   /**
-   * Is it Christmas eve?
+   * Today na Christmas eve?
    * @returns boolean
    */
-  isDayBeforeChristmas(): boolean {
+  naChristmasEve(): boolean {
     return (
       this.getDate().getMonth() === 11 &&
       this.getDate().getDate() === 24 &&
@@ -152,18 +152,18 @@ export default class Time {
   }
 
   /**
-   * Is it Christmas?
+   * Today na Christmas?
    * @returns boolean
    */
-  isChristmas(): boolean {
+  naChristmas(): boolean {
     return this.getDate().getMonth() === 11 && this.getDate().getDate() === 25
   }
 
   /**
-   * Is it New Years eve or New Year?
+   * We dey New Year's eve or New Year?
    * @returns boolean
    */
-  isNewYear(): boolean {
+  naNewYear(): boolean {
     return (
       (this.now().getMonth() === 11 &&
         this.now().getDate() === 31 &&
@@ -173,10 +173,10 @@ export default class Time {
   }
 
   /**
-   * Combine if holidays
+   * Check if na any holiday
    * @returns boolean
    */
-  isHolidays(): boolean {
-    return this.isDayBeforeChristmas() || this.isChristmas() || this.isNewYear()
+  naHolidays(): boolean {
+    return this.naChristmasEve() || this.naChristmas() || this.naNewYear()
   }
 }

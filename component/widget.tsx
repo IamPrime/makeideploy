@@ -21,7 +21,7 @@ const Widget = (props: IWidget) => {
   }, [])
 
   /**
-   * On hitting Space reload reasons
+   * If person press Space, reload reasons
    * @return void
    */
   const onSpacePressOrClick = (event: { type: string; keyCode?: number }) => {
@@ -31,7 +31,7 @@ const Widget = (props: IWidget) => {
   }
 
   /**
-   * Get reasons according to current time
+   * Collect reasons based on wetin time be now
    * @return string[]
    */
   const getReasons = () => {
@@ -39,7 +39,7 @@ const Widget = (props: IWidget) => {
   }
 
   /**
-   * update and get random reasons
+   * Update and collect random reasons
    * @return void
    */
   const updateReasons = () => {
@@ -48,17 +48,17 @@ const Widget = (props: IWidget) => {
   }
 
   /**
-   * Render widget
+   * Show widget for screen
    * @return JSX.Element
    */
   return (
     <div className="item">
-      <h3 className="tagline">Should I Deploy Today?</h3>
+      <h3 className="tagline">Make I Deploy Today?</h3>
       <h2 id="text" className="reason">
         {reason}
       </h2>
       <span id="reload" onClick={onSpacePressOrClick}>
-        Hit <span className="space-btn">Space</span> or Click
+        Press <span className="space-btn">Space</span> or Click Mouse
       </span>
     </div>
   )

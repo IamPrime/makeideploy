@@ -13,7 +13,7 @@ const Footer = (props: IFooter) => {
         <li>Share:</li>
         <li>
           <a
-            href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fshouldideploy.today%2F&t=Should%20I%20Deploy%20Today%3F"
+            href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmakeideploy.today%2F&t=Make%20I%20Deploy%20Today%3F"
             target="_blank"
             rel="noopener noreferrer"
             title="Share on Facebook"
@@ -23,7 +23,7 @@ const Footer = (props: IFooter) => {
         </li>
         <li>
           <a
-            href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fshouldideploy.today%2F&text=Should%20I%20Deploy%20Today%3F:%20http%3A%2F%2Fshouldideploy.today"
+            href="https://twitter.com/intent/tweet?source=https%3A%2F%2Fmakeideploy.today%2F&text=Make%20I%20Deploy%20Today%3F:%20https%3A%2F%2Fmakeideploy.today"
             target="_blank"
             rel="noopener noreferrer"
             title="Tweet"
@@ -36,7 +36,7 @@ const Footer = (props: IFooter) => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="http://github.com/baires/shouldideploy/"
+            href="https://github.com/IamPrime/makeideploy"
           >
             Github
           </a>

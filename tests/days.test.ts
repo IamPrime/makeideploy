@@ -11,97 +11,97 @@ describe('Time class', () => {
     jest.restoreAllMocks()
   })
 
-  it('isThursday', () => {
-    mockDate('2023-03-30T00:00:00') // Thursday, March 30th, 2023
+  it('naThursday', () => {
+    mockDate('2024-11-21T00:00:00') // Thursday, November 21st, 2024
     const time = new Time('UTC')
-    expect(time.isThursday()).toBe(true)
+    expect(time.naThursday()).toBe(true)
   })
 
-  it('isFriday', () => {
-    mockDate('2023-03-31T00:00:00') // Friday, March 31st, 2023
+  it('naFriday', () => {
+    mockDate('2024-11-22T00:00:00') // Friday, November 22nd, 2024
     const time = new Time('UTC')
-    expect(time.isFriday()).toBe(true)
+    expect(time.naFriday()).toBe(true)
   })
-  it('is13th', () => {
-    mockDate('2023-03-13T00:00:00') // March 13th, 2023
+  it('na22nd', () => {
+    mockDate('2024-11-22T00:00:00') // November 22nd, 2024
     const time = new Time('UTC')
-    expect(time.is13th()).toBe(true)
-  })
-
-  it('isAfternoon', () => {
-    mockDate('2023-03-30T17:00:00') // March 30th, 2023, 17:00 (5 PM)
-    const time = new Time('UTC')
-    expect(time.isAfternoon()).toBe(true)
+    expect(time.na22nd()).toBe(true)
   })
 
-  it('isThursdayAfternoon', () => {
-    mockDate('2023-03-30T17:00:00') // Thursday, March 30th, 2023, 17:00 (5 PM)
+  it('naAfternoon', () => {
+    mockDate('2024-11-21T17:00:00') // November 21st, 2024, 17:00 (5 PM)
     const time = new Time('UTC')
-    expect(time.isThursdayAfternoon()).toBe(true)
+    expect(time.naAfternoon()).toBe(true)
   })
 
-  it('isFridayAfternoon', () => {
-    mockDate('2023-03-31T17:00:00') // Friday, March 31st, 2023, 17:00 (5 PM)
+  it('naThursdayAfternoon', () => {
+    mockDate('2024-11-21T17:00:00') // Thursday, November 21st, 2024, 17:00 (5 PM)
     const time = new Time('UTC')
-    expect(time.isFridayAfternoon()).toBe(true)
+    expect(time.naThursdayAfternoon()).toBe(true)
   })
 
-  it('isFriday13th', () => {
-    mockDate('2023-10-13T00:00:00') // Friday, October 13th, 2023
+  it('naFridayAfternoon', () => {
+    mockDate('2024-11-22T17:00:00') // Friday, November 22nd, 2024, 17:00 (5 PM)
     const time = new Time('UTC')
-    expect(time.isFriday13th()).toBe(true)
+    expect(time.naFridayAfternoon()).toBe(true)
   })
 
-  it('isWeekend should return true for Saturday and Sunday', () => {
-    const saturdayTime = new Time('UTC', '2023-01-07')
-    const sundayTime = new Time('UTC', '2023-01-08')
-    expect(saturdayTime.isWeekend()).toBe(true)
-    expect(sundayTime.isWeekend()).toBe(true)
+  it('naFriday22nd', () => {
+    mockDate('2024-11-22T00:00:00') // Friday, November 22nd, 2024
+    const time = new Time('UTC')
+    expect(time.naFriday22nd()).toBe(true)
   })
 
-  it('isDayBeforeChristmas', () => {
-    mockDate('2023-12-24T17:00:00') // December 24th, 2023, 17:00 (5 PM)
-    const time = new Time('UTC')
-    expect(time.isDayBeforeChristmas()).toBe(true)
+  it('naWeekend should return true for Saturday and Sunday', () => {
+    const saturdayTime = new Time('UTC', '2024-11-23')
+    const sundayTime = new Time('UTC', '2024-11-24')
+    expect(saturdayTime.naWeekend()).toBe(true)
+    expect(sundayTime.naWeekend()).toBe(true)
   })
 
-  it('isChristmas', () => {
-    mockDate('2023-12-25T00:00:00') // December 25th, 2023
+  it('naChristmasEve', () => {
+    mockDate('2024-12-24T17:00:00') // December 24th, 2024, 17:00 (5 PM)
     const time = new Time('UTC')
-    expect(time.isChristmas()).toBe(true)
+    expect(time.naChristmasEve()).toBe(true)
   })
 
-  it('isNewYear', () => {
-    mockDate('2023-12-31T17:00:00') // December 31st, 2023, 17:00 (5 PM)
+  it('naChristmas', () => {
+    mockDate('2024-12-25T00:00:00') // December 25th, 2024
     const time = new Time('UTC')
-    expect(time.isNewYear()).toBe(true)
+    expect(time.naChristmas()).toBe(true)
+  })
 
-    mockDate('2024-01-01T00:00:00') // January 1st, 2024
+  it('naNewYear', () => {
+    mockDate('2024-12-31T17:00:00') // December 31st, 2024, 17:00 (5 PM)
+    const time = new Time('UTC')
+    expect(time.naNewYear()).toBe(true)
+
+    mockDate('2025-01-01T00:00:00') // January 1st, 2025
     const time2 = new Time('UTC')
-    expect(time2.isNewYear()).toBe(true)
+    expect(time2.naNewYear()).toBe(true)
   })
 
-  it('isHolidays', () => {
-    mockDate('2023-12-24T17:00:00') // December 24th, 2023, 17:00 (5 PM)
+  it('naHolidays', () => {
+    mockDate('2024-12-24T17:00:00') // December 24th, 2024, 17:00 (5 PM)
     const time = new Time('UTC')
-    expect(time.isHolidays()).toBe(true)
+    expect(time.naHolidays()).toBe(true)
 
-    mockDate('2023-12-25T00:00:00') // December 25th, 2023
+    mockDate('2024-12-25T00:00:00') // December 25th, 2024
     const time2 = new Time('UTC')
-    expect(time2.isHolidays()).toBe(true)
+    expect(time2.naHolidays()).toBe(true)
 
-    mockDate('2023-12-31T17:00:00') // December 31st, 2023, 17:00 (5 PM)
+    mockDate('2024-12-31T17:00:00') // December 31st, 2024, 17:00 (5 PM)
     const time3 = new Time('UTC')
-    expect(time3.isHolidays()).toBe(true)
+    expect(time3.naHolidays()).toBe(true)
 
-    mockDate('2024-01-01T00:00:00') // January 1st, 2024
+    mockDate('2025-01-01T00:00:00') // January 1st, 2025
     const time4 = new Time('UTC')
-    expect(time4.isHolidays()).toBe(true)
+    expect(time4.naHolidays()).toBe(true)
   })
   it('setTimezone - valid timezone', () => {
     const time = new Time('UTC')
-    time.setTimezone('America/New_York')
-    expect(time.timezone).toBe('America/New_York')
+    time.setTimezone('Africa/Lagos')
+    expect(time.timezone).toBe('Africa/Lagos')
   })
 
   it('setTimezone - invalid timezone', () => {
@@ -111,9 +111,9 @@ describe('Time class', () => {
   })
 
   it('validOrNull - valid timezone', () => {
-    const time = Time.validOrNull('America/New_York')
+    const time = Time.validOrNull('Africa/Lagos')
     expect(time).not.toBeNull()
-    expect(time?.timezone).toBe('America/New_York')
+    expect(time?.timezone).toBe('Africa/Lagos')
   })
 
   it('validOrNull - invalid timezone', () => {
@@ -127,38 +127,38 @@ describe('Time class', () => {
     expect(time?.timezone).toBe(Time.DEFAULT_TIMEZONE)
   })
 
-  it('isAfternoon - exactly 16:00', () => {
-    mockDate('2023-03-30T16:00:00') // March 30th, 2023, 16:00 (4 PM)
+  it('naAfternoon - exactly 16:00', () => {
+    mockDate('2024-11-21T16:00:00') // November 21st, 2024, 16:00 (4 PM)
     const time = new Time('UTC')
-    expect(time.isAfternoon()).toBe(true)
+    expect(time.naAfternoon()).toBe(true)
   })
 
-  it('isThursdayAfternoon - exactly 16:00', () => {
-    mockDate('2023-03-30T16:00:00') // Thursday, March 30th, 2023, 16:00 (4 PM)
+  it('naThursdayAfternoon - exactly 16:00', () => {
+    mockDate('2024-11-21T16:00:00') // Thursday, November 21st, 2024, 16:00 (4 PM)
     const time = new Time('UTC')
-    expect(time.isThursdayAfternoon()).toBe(true)
+    expect(time.naThursdayAfternoon()).toBe(true)
   })
 
-  it('isFridayAfternoon - exactly 16:00', () => {
-    mockDate('2023-03-31T16:00:00') // Friday, March 31st, 2023, 16:00 (4 PM)
+  it('naFridayAfternoon - exactly 16:00', () => {
+    mockDate('2024-11-22T16:00:00') // Friday, November 22nd, 2024, 16:00 (4 PM)
     const time = new Time('UTC')
-    expect(time.isFridayAfternoon()).toBe(true)
+    expect(time.naFridayAfternoon()).toBe(true)
   })
 
-  it('isNewYear - exactly 16:00 on Dec 31st', () => {
-    mockDate('2023-12-31T16:00:00') // December 31st, 2023, 16:00 (4 PM)
+  it('naNewYear - exactly 16:00 on Dec 31st', () => {
+    mockDate('2024-12-31T16:00:00') // December 31st, 2024, 16:00 (4 PM)
     const time = new Time('UTC')
-    expect(time.isNewYear()).toBe(true)
+    expect(time.naNewYear()).toBe(true)
   })
 
-  it('isNewYear - exactly midnight on Jan 1st', () => {
-    mockDate('2024-01-01T00:00:00') // January 1st, 2024, 00:00 (midnight)
+  it('naNewYear - exactly midnight on Jan 1st', () => {
+    mockDate('2025-01-01T00:00:00') // January 1st, 2025, 00:00 (midnight)
     const time = new Time('UTC')
-    expect(time.isNewYear()).toBe(true)
+    expect(time.naNewYear()).toBe(true)
   })
 
   it('toObject should return correct object', () => {
-    const time = new Time('UTC', '2023-01-01')
+    const time = new Time('UTC', '2024-01-01')
     const obj = time.toObject()
     expect(obj).toEqual({
       timezone: 'UTC',
@@ -167,7 +167,7 @@ describe('Time class', () => {
   })
 
   it('now should return current date for custom date', () => {
-    const customDate = '2023-01-01'
+    const customDate = '2024-01-01'
     const time = new Time('UTC', customDate)
     expect(time.now()).toEqual(time.getDate())
   })

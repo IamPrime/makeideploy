@@ -10,16 +10,16 @@ describe('Time Class', () => {
     const time1 = new Time('UTC', '2023-03-31')
     const time2 = new Time('America/Argentina/Buenos_Aires', '2023-03-31')
 
-    expect(time1.isFriday()).toBe(true)
-    expect(time2.isFriday()).toBe(true)
+    expect(time1.naFriday()).toBe(true)
+    expect(time2.naFriday()).toBe(true)
   })
 
   test('should return shouldideploy status based on custom date and timezone', () => {
     const time1 = new Time('UTC', '2023-03-31')
     const time2 = new Time('America/Argentina/Buenos_Aires', '2023-03-31')
 
-    expect(time1.isFriday()).toBe(true)
-    expect(time2.isFriday()).toBe(true)
+    expect(time1.naFriday()).toBe(true)
+    expect(time2.naFriday()).toBe(true)
   })
 
   it('should change timezone if valid timezone is provided', () => {
@@ -71,8 +71,8 @@ describe('Time Class', () => {
     })
 
     it('should correctly identify Thursdays', () => {
-      expect(time.isThursday()).toBeTruthy()
-      expect(time.isFriday()).toBeFalsy()
+      expect(time.naThursday()).toBeTruthy()
+      expect(time.naFriday()).toBeFalsy()
     })
   })
 
@@ -83,8 +83,8 @@ describe('Time Class', () => {
     })
 
     it('should correctly identify Christmas', () => {
-      expect(time.isChristmas()).toBeTruthy()
-      expect(time.isDayBeforeChristmas()).toBeFalsy()
+      expect(time.naChristmas()).toBeTruthy()
+      expect(time.naChristmasEve()).toBeFalsy()
     })
   })
 })

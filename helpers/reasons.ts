@@ -1,121 +1,121 @@
 export const REASONS_TO_DEPLOY = [
-  "I don't see why not",
-  "It's a free country",
-  'Go ahead my friend!',
-  'Go for it',
-  'Go go go go!',
-  "Let's do it!",
-  'Ship it! 🚢',
-  'Go with the flow 🌊',
-  'Harder better faster stronger',
-  'Rock on!',
+  "I no see why you no go do am",
+  "Na free country we dey",
+  'Carry go my guy!',
+  'Gbosa! Do am',
+  'Waka waka waka!',
+  "Make we do am!",
+  'Ship am! 🚢',
+  'Follow flow 🌊',
+  'Do am well well',
+  'Joor!',
   'Make me proud',
-  'Break a leg!',
-  'This Is the Way',
-  'Strike First, Strike Hard, No Mercy!'
+  'No fear!',
+  'Na so e suppose be',
+  'Attack first, Attack strong, No mercy!'
 ]
 
 export const REASONS_TO_NOT_DEPLOY = [
-  "I wouldn't recommend it",
-  "No, it's Friday",
-  'What about Monday?',
-  'Not today',
-  'Nope',
-  'Why?',
-  'Did the tests pass? Probably not',
+  "I no go advise make you do am",
+  "Ah ah, today na Friday o",
+  'Why you no wait till Monday?',
+  'No be today',
+  'Mba',
+  'Wetin dey worry you?',
+  'You don run test? I no think so',
   '¯\\_(ツ)_/¯',
   '😹',
-  'No',
-  'No. Breathe and count to 10, start again',
-  "I'd rather have ice-cream 🍦",
-  'How could you? 🥺',
-  'Some people just want to watch the world burn 🔥',
-  "You like fire don't you?",
-  'The bugs are just waiting for you'
+  'Tufiakwa',
+  'No o. Breathe well, count reach 10, come back',
+  "I go prefer to chop ice-cream 🍦",
+  'How you go do this kind thing? 🥺',
+  'Some people just wan see as world dey burn 🔥',
+  "You like wahala abi?",
+  'Bugs dey wait for you'
 ]
 
 export const REASONS_FOR_THURSDAY_AFTERNOON = [
-  'You still want to sleep?',
-  'Call your partner!',
-  'Gonna stay late today?',
-  'Tell your boss that you found a bug and go home',
-  'What about Monday?',
-  "I wouldn't recommend it",
-  'Not today',
-  'Nope',
-  'No. Breathe and count to 10, start again'
+  'You still wan sleep?',
+  'Call your babe!',
+  'You wan do overtime?',
+  'Tell your oga say you see wahala, make you comot',
+  'Why you no wait till Monday?',
+  "I no go advise make you do am",
+  'No be today',
+  'Mba',
+  'No o. Breathe well, count reach 10, come back'
 ]
 
 export const REASONS_FOR_FRIDAY_AFTERNOON = [
-  'Not by any chance',
-  'U mad?',
-  'What you are thinking?',
-  'No no no no no no no no',
-  'How do you feel about working nights and weekends?',
+  'E no go work at all',
+  'You dey craze?',
+  'Wetin you dey think?',
+  'Mba mba mba mba mba mba mba mba',
+  'You ready to work for night and weekend?',
   '🔥 🚒 🚨 ⛔️ 🔥 🚒 🚨 ⛔️ 🔥 🚒 🚨 ⛔️',
-  'No! God! Please! No',
-  'No no no no no no no!',
-  'Keep dreaming darling',
-  'Why why Bro why?',
-  'But but but... why?',
-  'Deploys are for Monday, so you can fix them till Friday.',
+  'Tufiakwa! Abeg! No!',
+  'Mba mba mba mba mba mba mba!',
+  'Continue to dey dream',
+  'Why why Bros why?',
+  'But but but... wetin happen?',
+  'Na Monday we dey deploy, so you fit fix am till Friday.',
   'YOLO ! You only live once !',
-  "Error in line NaN Col -2 unexpected 'ↇ'"
+  "Error for line NaN Col -2 unexpected 'ↇ'"
 ]
 
-export const REASONS_FOR_FRIDAY_13TH = [
-  "Man, really? It's friday the 13th!",
-  'Do you believe in bad luck?',
-  'Jason is watching you',
-  'If you want to spend your weekend in Crystal Lake, go ahead',
-  'To pray is no help if you take this bad decision',
-  'Did you look at the calendar today?',
-  '📅 Friday the 13th. What do you think about it?',
+export const REASONS_FOR_FRIDAY_22ND = [
+  "Guy, seriously? Today na Friday 22nd!",
+  'You believe for bad luck?',
+  'Jason dey watch you',
+  'If you wan spend your weekend for Crystal Lake, carry go',
+  'Even if you pray, e no go help if you take this bad decision',
+  'You don check calendar today?',
+  '📅 Friday 13. Wetin you think?',
   'Just no!',
   'But but but... why?'
 ]
 
 export const REASONS_FOR_AFTERNOON = [
-  'You still want to sleep?',
-  'Call your partner!',
-  'Gonna stay late today?',
+  'You still wan sleep?',
+  'Call your babe!',
+  'You wan do overtime?',
   'Tomorrow?',
-  'No',
-  'Tell your boss that you found a bug and go home',
-  'You have full day ahead of you tomorrow!',
-  "Trust me, they will be much happier if it wasn't broken for a night",
-  'How much do you trust your logging tools?'
+  'Mba',
+  'Tell your oga say you see wahala, make you comot',
+  'You get full day tomorrow!',
+  "Trust me, dem go happy pass if e no spoil for night",
+  'How much you trust your logging tools?'
 ]
 
 export const REASONS_FOR_WEEKEND = [
-  "Go home, you're drunk",
+  "Go house, you don high",
   'How about Monday?',
   'Beer?',
-  'Drunk development is not a good idea!',
-  'I see you deployed on Friday',
-  'Told you that Monday would be a better idea!',
-  'There are 2^1000 other ideas.'
+  'To code when you high no good o!',
+  'I see say you deploy on Friday',
+  'I tell you say Monday for better!',
+  'E get like 2^1000 other ideas.'
 ]
 
 export const REASONS_FOR_DAY_BEFORE_CHRISTMAS = [
-  'Are you Santa 🧑‍🎄 or what?',
+  'You be Santa 🧑‍🎄 or wetin?',
   '🎶🎵 You better watch out 🎵🎶',
-  '🎄 Enjoy the holiday season! 🎄 ',
-  'Just take another glass of eggnog',
-  "Can't you just wait after present unwrapping?",
-  'Sure, deploy... \n your family will appreciate you fixing things on your phone during dinner'
+  '🎄 Enjoy Christmas season! 🎄 ',
+  'Just drink another cup of eggnog',
+  "You no fit wait make dem share gift finish?",
+  'Sure, deploy... \n your family go like am as you dey fix things for your phone during dinner'
 ]
 
 export const REASONS_FOR_CHRISTMAS = [
   ...REASONS_FOR_DAY_BEFORE_CHRISTMAS,
-  'No, Rudolf will hunt you down 🦌 ',
+  'No, Rudolf go hunt you down 🦌 ',
   'Just watch Home Alone today',
-  "Shouldn't you be preparing a christmas dinner?"
+  "You no suppose dey prepare Christmas food?"
 ]
 
 export const REASONS_NEW_YEAR = [
-  'Happy New Year! \n deploy the 2nd of january',
-  "Aren't you hungover?",
+  'Happy New Year! \n deploy for January 2',
+  "Hangover never catch you?",
   'Take another glass of champagne 🥂',
   'Celebrate today, deploy tomorrow 🎇'
 ]

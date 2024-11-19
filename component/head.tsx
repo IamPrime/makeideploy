@@ -7,29 +7,29 @@ const Head = () => {
       <meta name="viewport" content="width=device-width" />
       <meta
         name="description"
-        content="A friendly reminder to all Developers, Designers, CEOs"
+        content="E Good Make I Deploy Today | Reminder for all dem Developers, Designers and Ogas at the top"
       />
 
-      <meta itemProp="name" content="Should I Deploy Today" />
+      <meta itemProp="name" content="Make I Deploy Today?" />
       <meta
         itemProp="description"
-        content="A friendly reminder to all Developers, Designers, CEOs"
+        content="E Good Make I Deploy Today | Reminder for all dem Developers, Designers and Ogas at the top"
       />
 
       <meta name="twitter:card" content="summary" />
-      <meta name="twitter:title" content="Should I Deploy Today" />
+      <meta name="twitter:title" content="Make I Deploy Today?" />
       <meta
         name="twitter:description"
-        content="A friendly reminder to all Developers, Designers, CEOs"
+        content="E Good Make I Deploy Today | Reminder for all dem Developers, Designers and Ogas at the top"
       />
 
-      <meta property="og:title" content="Should I Deploy Today" />
+      <meta property="og:title" content="Make I Deploy Today?" />
       <meta
         property="og:description"
-        content="A friendly reminder to all Developers, Designers, CEOs"
+        content="E Good Make I Deploy Today | Reminder for all dem Developers, Designers and Ogas at the top"
       />
-      <meta property="og:url" content="https://shouldideploy.today" />
-      <meta property="og:site_name" content="Should I Deploy Today" />
+      <meta property="og:url" content="https://makeideploy.today" />
+      <meta property="og:site_name" content="E Good Make I Deploy Today?" />
       <meta property="og:type" content="website" />
 
       <meta name="theme-color" content="#1E1F29" />
