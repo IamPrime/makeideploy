@@ -66,11 +66,11 @@ export const REASONS_FOR_FRIDAY_AFTERNOON = [
 export const REASONS_FOR_FRIDAY_22ND = [
   "Guy, seriously? Today na Friday 22nd!",
   'You believe for bad luck?',
-  'Jason dey watch you',
+  'T-Pain dey watch you',
   'If you wan spend your weekend for Crystal Lake, carry go',
   'Even if you pray, e no go help if you take this bad decision',
   'You don check calendar today?',
-  '📅 Friday 13. Wetin you think?',
+  '📅 Friday 22nd. Wetin you think?',
   'Just no!',
   'But but but... why?'
 ]
@@ -90,7 +90,7 @@ export const REASONS_FOR_AFTERNOON = [
 export const REASONS_FOR_WEEKEND = [
   "Go house, you don high",
   'How about Monday?',
-  'Beer?',
+  'Beer abi Club?',
   'To code when you high no good o!',
   'I see say you deploy on Friday',
   'I tell you say Monday for better!',
@@ -98,10 +98,10 @@ export const REASONS_FOR_WEEKEND = [
 ]
 
 export const REASONS_FOR_DAY_BEFORE_CHRISTMAS = [
-  'You be Santa 🧑‍🎄 or wetin?',
+  'You be Father Christmas 🧑‍🎄 or wetin?',
   '🎶🎵 You better watch out 🎵🎶',
   '🎄 Enjoy Christmas season! 🎄 ',
-  'Just drink another cup of eggnog',
+  'Just drink another cup of Palmwine 🍷',
   "You no fit wait make dem share gift finish?",
   'Sure, deploy... \n your family go like am as you dey fix things for your phone during dinner'
 ]
@@ -116,6 +116,6 @@ export const REASONS_FOR_CHRISTMAS = [
 export const REASONS_NEW_YEAR = [
   'Happy New Year! \n deploy for January 2',
   "Hangover never catch you?",
-  'Take another glass of champagne 🥂',
+  'Take another glass of Nkwu enu 🥂',
   'Celebrate today, deploy tomorrow 🎇'
 ]
