@@ -1,7 +1,29 @@
 # makeideploy.today [site]
 
-We just want make you know say we no de joke. 
-I know say some of una people dey think say we dey joke but we dey serious.
+## Wetin Dis Repo Be About 🚀
+
+Dis na Pidgin English version of "makeideploy" repo. We dey try make developers, designers, and tech people laugh small before dem deploy code.
+
+### How We Dey Roll 💻
+
+- We dey speak pure pidgin
+- We dey welcome contributions wey dey speak pidgin
+- No serious grammar, just vibes and code 😎
+
+### You Fit Contribute? 🤝
+
+- Fork the repo
+- Add your pidgin magic
+- Make pull request
+- Make everybody laugh small 😂
+
+### Rules Wey Simple
+
+- Write code wey work
+- Use pidgin wey everybody go understand
+- No form grammar, just flow
+
+**Abeg, come join us make we laugh and code!** 🇳🇬🖥️
 
 FOSSA Status - [fossa-url]
 FOSSA Badge - [fossa-badge]
