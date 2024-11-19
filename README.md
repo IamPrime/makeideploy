@@ -2,7 +2,7 @@
 
 ## Wetin Dis Repo Be About 🚀
 
-Dis na Pidgin English version of "makeideploy" repo. We dey try make developers, designers, and tech people laugh small before dem deploy code.
+Dis na Pidgin English version of "shouldideploy" repo. We dey try make developers, designers, and tech people laugh small before dem deploy code.
 
 ### How We Dey Roll 💻
 
