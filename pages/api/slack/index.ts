@@ -2,8 +2,8 @@ import {
   getRandom,
   dayHelper,
   getBaseUrl,
-  shouldIDeployColorTheme,
-  shouldIDeployFavIcon
+  makeIDeployColorTheme,
+  makeIDeployFavIcon
 } from '../../../helpers/constants'
 import Time from '../../../helpers/time'
 
@@ -37,10 +37,10 @@ export default (
         text: time
           ? getRandom(dayHelper(time))
           : `Invalid time zone: '${timezone}'`,
-        color: shouldIDeployColorTheme(time),
+        color: makeIDeployColorTheme(time),
         thumb_url,
-        footer_icon: shouldIDeployFavIcon(time),
-        footer: 'Should I deploy today' + (time ? ` | ${timezone}` : '')
+        footer_icon: makeIDeployFavIcon(time),
+        footer: 'Make I deploy today' + (time ? ` | ${timezone}` : '')
       }
     ]
   })

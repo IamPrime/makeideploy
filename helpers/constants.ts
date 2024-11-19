@@ -16,11 +16,11 @@ export function getBaseUrl() {
   if (typeof window !== 'undefined') return ''
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`
   if (process.env.NODE_ENV === 'production')
-    return 'https://shouldideploy.today'
+    return 'https://makeideploy.today'
   return `http://localhost:${process.env.PORT ?? 3001}`
 }
 
-export const shouldIDeploy = function (time: Time | null, date?: Date) {
+export const makeIDeploy = function (time: Time | null, date?: Date) {
   if (!time) {
     return false
   }
@@ -39,16 +39,16 @@ export const shouldIDeploy = function (time: Time | null, date?: Date) {
   )
 }
 
-export const shouldIDeployColorTheme = function (time: Time | null) {
-  return shouldIDeploy(time) ? '#36a64f' : '#ff4136'
+export const makeIDeployColorTheme = function (time: Time | null) {
+  return makeIDeploy(time) ? '#36a64f' : '#ff4136'
 }
 
-export const shouldIDeployFontTheme = function (time: Time | null) {
-  return shouldIDeploy(time) ? '#fff' : '#111'
+export const makeIDeployFontTheme = function (time: Time | null) {
+  return makeIDeploy(time) ? '#fff' : '#111'
 }
 
-export const shouldIDeployFavIcon = function (time: Time | null) {
-  return shouldIDeploy(time)
+export const makeIDeployFavIcon = function (time: Time | null) {
+  return makeIDeploy(time)
     ? `${getBaseUrl()}/dots.png`
     : `${getBaseUrl()}/dots-red.png`
 }

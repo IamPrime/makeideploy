@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import {
-  shouldIDeploy,
-  shouldIDeployFavIcon,
+  makeIDeploy,
+  makeIDeployFavIcon,
   getBaseUrl
 } from '../helpers/constants'
 import Time from '../helpers/time'
@@ -43,13 +43,13 @@ const Page: React.FC<IPage> = ({ tz, now: initialNow, initialReason }) => {
         <link
           rel="icon"
           type="image/png"
-          href={shouldIDeployFavIcon(now)}
+          href={makeIDeployFavIcon(now)}
           sizes="32x32"
         />
         <meta property="og:image" content={`${getBaseUrl()}/api/og`} />
-        <title>Should I Deploy Today?</title>
+        <title>Make I Deploy Today?</title>
       </Head>
-      <div className={`wrapper ${!shouldIDeploy(now) && 'its-friday'}`}>
+      <div className={`wrapper ${!makeIDeploy(now) && 'its-friday'}`}>
         <Widget key={now.timezone} reason={initialReason} now={now} />
         <div className="meta">
           <Footer timezone={timezone} changeTimezone={changeTimezone} />

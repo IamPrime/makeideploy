@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import Time from '../../helpers/time'
-import { getRandom, dayHelper, shouldIDeploy } from '../../helpers/constants'
+import { getRandom, dayHelper, makeIDeploy } from '../../helpers/constants'
 
 type ApiResponse = {
   error?: { message: string; type: string; code: number }
   timezone?: string
   date?: string
-  shouldideploy?: boolean | null
+  makeideploy?: boolean | null
   message?: string
 }
 
@@ -56,7 +56,7 @@ const handler = async (
     date: customDate
       ? new Date(customDate).toISOString()
       : time.now().toISOString(),
-    shouldideploy: shouldIDeploy(time),
+    makeideploy: makeIDeploy(time),
     message: getRandom(dayHelper(time))
   })
 }

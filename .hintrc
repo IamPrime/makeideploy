@@ -17,6 +17,7 @@
           "meta[name=theme-color]"
         ]
       }
-    ]
+    ],
+    "no-inline-styles": "off"
   }
 }
