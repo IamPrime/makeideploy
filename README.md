@@ -1,4 +1,8 @@
-# makeideploy.today [site]
+# [makeideploy.today]
+
+FOSSA Status - [fossa-url]
+FOSSA License Badge - [fossa-license-badge]
+FOSSA Security Badge - [fossa-security-badge]
 
 ## Wetin Dis Repo Be About 🚀
 
@@ -24,9 +28,6 @@ Dis na Pidgin English version of "shouldideploy" repo. We dey try make developer
 - No form grammar, just flow
 
 **Abeg, come join us make we laugh and code!** 🇳🇬🖥️
-
-FOSSA Status - [fossa-url]
-FOSSA Badge - [fossa-badge]
 
 ## Getting started
 
@@ -103,9 +104,10 @@ Favicon created by **emilegraphics** from the NOUN Project at [favicon-credit]
 
 Abeg check am for [license-link] || WTFPL - You fit do anytin wey you want with dis code!
 
-- [site]: https://makeideploy.today
-- [fossa-badge]: We go put am
-- [fossa-url]: https://app.fossa.io/projects/#
+- [makeideploy.today]: https://makeideploy.today
+- [fossa-security-badge]: https://app.fossa.com/api/projects/git%2Bgithub.com%2FIamPrime%2Fmakeideploy.svg?type=shield&issueType=security
+- [fossa-url]: https://app.fossa.com/projects/git%2Bgithub.com%2FIamPrime%2Fmakeideploy/refs/branch/master/4fb86dd32bd7365637daf5b4f689347539ab742f
+- [fossa-license-badge]: https://app.fossa.com/api/projects/git%2Bgithub.com%2FIamPrime%2Fmakeideploy.svg?type=shield&issueType=license
 - [reasons.ts]: https://github.com/IamPrime/makeideploy/blob/master/helpers/reasons.ts
 - [api-endpoint]: https://makeideploy.today/api
 - [favicon-credit]: https://thenounproject.com/search/?q=dot&i=1359410
