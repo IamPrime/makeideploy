@@ -8,7 +8,7 @@ interface IWidget {
 }
 
 const Widget = (props: IWidget) => {
-  const [reason, setReasons] = React.useState<string>()
+  const [reason, setReasons] = React.useState<string>(props.reason)
   const [timezone, setTimezone] = React.useState<Time>()
 
   React.useEffect(() => {

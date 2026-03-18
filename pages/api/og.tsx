@@ -16,10 +16,12 @@ const font = fetch(
   new URL('../../public/fonts/GeneralSans-Bold.otf', import.meta.url)
 ).then((res) => res.arrayBuffer())
 
-export default async function handler() {
+export default async function handler(req: { query?: { tz?: string; date?: string } } = {}) {
   const fontData = await font
-  let timezone = Time.DEFAULT_TIMEZONE
-  let time = Time.validOrNull(timezone)
+  const queryTz = req.query?.tz as string | undefined
+  const queryDate = req.query?.date as string | undefined
+  let timezone = queryTz && Time.zoneExists(queryTz) ? queryTz : Time.DEFAULT_TIMEZONE
+  let time = queryDate ? new Time(timezone, queryDate) : Time.validOrNull(timezone)
 
   return new ImageResponse(
     (

@@ -5,7 +5,9 @@ import Head from 'next/head'
 import {
   makeIDeploy,
   makeIDeployFavIcon,
-  getBaseUrl
+  getBaseUrl,
+  getRandom,
+  dayHelper
 } from '../helpers/constants'
 import Time from '../helpers/time'
 import Widget from '../component/widget'
@@ -73,7 +75,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       tz: timezone,
-      now: time ? time.toObject() : null
+      now: time ? time.toObject() : null,
+      initialReason: time ? getRandom(dayHelper(time)) : 'Invalid timezone'
     }
   }
 }

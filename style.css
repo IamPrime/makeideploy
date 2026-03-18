@@ -179,13 +179,20 @@ ul.footer-list select {
   color: #ff9089;
 }
 
-.its-friday #reload,
+.its-friday #reload {
+  color: #fff;
+}
+
 .its-friday .footer-list a {
   color: #b30a00;
 }
 
-.its-friday .space-btn,
-.its-friday span {
+.its-friday .space-btn {
+  border-color: #fff;
+  color: #fff;
+}
+
+.its-friday .footer-list span {
   border-color: #b30a00;
   color: #b30a00;
 }
