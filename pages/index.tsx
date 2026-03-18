@@ -12,6 +12,7 @@ import {
 import Time from '../helpers/time'
 import Widget from '../component/widget'
 import Footer from '../component/footer'
+import { I18nContext } from './_app'
 import Router from 'next/router'
 
 interface IPage {
@@ -39,6 +40,13 @@ const Page: React.FC<IPage> = ({ tz, now: initialNow, initialReason }) => {
     setNow(new Time(newTimezone))
   }
 
+  const { t, locale } = React.useContext(I18nContext)
+
+  React.useEffect(() => {
+    const title = t ? t('title') : 'Make I Deploy Today?'
+    document.title = title
+  }, [locale, t])
+
   return (
     <>
       <Head>
@@ -49,7 +57,6 @@ const Page: React.FC<IPage> = ({ tz, now: initialNow, initialReason }) => {
           sizes="32x32"
         />
         <meta property="og:image" content={`${getBaseUrl()}/api/og`} />
-        <title>Make I Deploy Today?</title>
       </Head>
       <div className={`wrapper ${!makeIDeploy(now) && 'its-friday'}`}>
         <Widget key={now.timezone} reason={initialReason} now={now} />

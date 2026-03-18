@@ -7,7 +7,10 @@ interface IWidget {
   reason: string
 }
 
+import { I18nContext } from '../pages/_app'
+
 const Widget = (props: IWidget) => {
+  const { t } = React.useContext(I18nContext)
   const [reason, setReasons] = React.useState<string>(props.reason)
   const [timezone, setTimezone] = React.useState<Time>()
 
@@ -17,6 +20,9 @@ const Widget = (props: IWidget) => {
       updateReasons()
     }
     document.addEventListener('keydown', onSpacePressOrClick)
+    return () => {
+      document.removeEventListener('keydown', onSpacePressOrClick)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -53,12 +59,14 @@ const Widget = (props: IWidget) => {
    */
   return (
     <div className="item">
-      <h3 className="tagline">Make I Deploy Today?</h3>
+      <h3 className="tagline">{t('tagline')}</h3>
       <h2 id="text" className="reason">
         {reason}
       </h2>
       <span id="reload" onClick={onSpacePressOrClick}>
-        Press <span className="space-btn">Space</span> or Click Mouse
+        {t('press')}{' '}
+        <span className="space-btn">{t('space')}</span> {t('or')}{' '}
+        {t('click')} <span style={{ marginLeft: '0.25rem' }}>👆</span>
       </span>
     </div>
   )

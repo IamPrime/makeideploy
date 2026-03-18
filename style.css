@@ -7,6 +7,24 @@ html {
 body {
   font-size: 1.4rem;
   height: 100%;
+  background: var(--bg);
+  color: var(--text);
+}
+
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #1c093f;
+  --accent: #b4221b;
+  --btn-border: #a3a3a3;
+}
+
+body.dark {
+  --bg: #0b0f17;
+  --text: #e6eef8;
+  --muted: #9aa6b2;
+  --accent: #b4221b;;
+  --btn-border: #9aa6b2;
 }
 
 /*csslint box-sizing:false,universal-selector: false*/
@@ -76,7 +94,7 @@ a:focus {
   font: 300 2rem/2.5rem SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
   margin-bottom: 1em;
-  color: #999;
+  color: var(--muted);
   text-transform: uppercase;
   padding: 14px 0 13px 0;
 }
@@ -84,7 +102,7 @@ a:focus {
 #text {
   font: 900 6rem/6rem -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-  color: #111;
+  color: var(--text);
   text-transform: uppercase;
   hyphens: auto;
 }
@@ -105,7 +123,7 @@ a:focus {
   border: 0;
   background: transparent;
   text-decoration: none;
-  color: #a3a3a3;
+  color: var(--muted);
   margin-top: 4rem;
   outline: none;
   cursor: pointer;
@@ -114,9 +132,43 @@ a:focus {
 .space-btn {
   width: 15rem;
   padding: 0.25em 1em;
-  border: 1px solid #a3a3a3;
+  border: 1px solid var(--btn-border);
   border-radius: 4px;
-  color: #000;
+  color: var(--text);
+}
+
+.footer-list select {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--btn-border);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.footer-list select option {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.theme-btn {
+  border: 0;
+  background: transparent;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--text);
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+}
+
+.theme-btn:focus,
+.footer-list select:focus,
+.space-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.theme-pill {
+  color: var(--text);
 }
 
 ul.footer-list {
@@ -124,20 +176,38 @@ ul.footer-list {
   padding: 0;
   display: inline-flex;
   align-items: center;
-}
-ul.footer-list:first-of-type {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
   margin-bottom: 1.5rem;
-  display: block;
+}
+
+ul.footer-list.footer-api {
+  width: 100%;
 }
 
 ul.footer-list li {
-  display: inline-block;
-  color: #222;
+  display: inline-flex;
+  align-items: center;
+  color: var(--text);
+  margin: 0;
+  gap: 0.25rem;
+}
+
+ul.footer-list li:not(:last-child)::after {
+  content: '|';
   margin: 0 0.25rem;
+  color: var(--btn-border);
+}
+
+.footer-label {
+  color: var(--muted);
+  font-weight: 500;
 }
 
 ul.footer-list a {
-  color: #777;
+  color: var(--text);
+  font-weight: 600;
 }
 
 ul.footer-list select {
@@ -168,33 +238,71 @@ ul.footer-list select {
 }
 
 .its-friday {
-  background-color: #ff4136;
+  background-color: var(--accent);
+  --text: #1a1a1a;
 }
 
 .its-friday .tagline {
-  color: #fff;
-}
-
-.its-friday .footer-list li {
-  color: #ff9089;
+  color: #1a1a1a;
+  text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.2);
+  -webkit-font-smoothing: antialiased;
 }
 
 .its-friday #reload {
-  color: #fff;
+  color: #1a1a1a;
+  text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.2);
+  -webkit-font-smoothing: antialiased;
+}
+
+.its-friday .footer-list li {
+  color: #1a1a1a;
+  text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.2);
+  -webkit-font-smoothing: antialiased;
+}
+
+.its-friday .footer-label {
+  color: rgba(26, 26, 26, 0.85);
+  text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.2);
+  -webkit-font-smoothing: antialiased;
 }
 
 .its-friday .footer-list a {
-  color: #b30a00;
+  color: #1a1a1a;
+  font-weight: 600;
+  text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.2);
 }
 
 .its-friday .space-btn {
-  border-color: #fff;
-  color: #fff;
+  border-color: #1a1a1a;
+  color: #1a1a1a;
+  text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.1);
+  -webkit-font-smoothing: antialiased;
 }
 
 .its-friday .footer-list span {
-  border-color: #b30a00;
-  color: #b30a00;
+  border-color: #1a1a1a;
+  color: #1a1a1a;
+  text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.1);
+  -webkit-font-smoothing: antialiased;
+}
+
+.its-friday .footer-list select {
+  background: rgba(255, 255, 255, 0.2);
+  color: #1a1a1a;
+  border-color: #1a1a1a;
+  -webkit-font-smoothing: antialiased;
+}
+
+.its-friday .footer-list select option {
+  background: var(--accent);
+  color: #1a1a1a;
+  -webkit-font-smoothing: antialiased;
+}
+
+.its-friday .footer-list label {
+  color: #1a1a1a;
+  text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.1);
+  -webkit-font-smoothing: antialiased;
 }
 
 .reason {
