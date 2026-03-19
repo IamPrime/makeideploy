@@ -61,44 +61,72 @@ export const getRandom = function ranDay(list: string | string[]) {
  * Return a list of reasons according of time parameter
  * @param string[]
  */
-export function dayHelper(time: Time) {
+export function dayHelper(
+  time: Time,
+  reasons?: {
+    REASONS_TO_DEPLOY: string[]
+    REASONS_TO_NOT_DEPLOY: string[]
+    REASONS_FOR_THURSDAY_AFTERNOON: string[]
+    REASONS_FOR_FRIDAY_AFTERNOON: string[]
+    REASONS_FOR_FRIDAY_22ND: string[]
+    REASONS_FOR_AFTERNOON: string[]
+    REASONS_FOR_WEEKEND: string[]
+    REASONS_FOR_DAY_BEFORE_CHRISTMAS: string[]
+    REASONS_FOR_CHRISTMAS: string[]
+    REASONS_NEW_YEAR: string[]
+  }
+) {
   time = time || new Time(time)
 
+  // Use provided localized reasons or fallback to hardcoded English ones
+  const reasonSet = reasons || {
+    REASONS_TO_DEPLOY,
+    REASONS_TO_NOT_DEPLOY,
+    REASONS_FOR_THURSDAY_AFTERNOON,
+    REASONS_FOR_FRIDAY_AFTERNOON,
+    REASONS_FOR_FRIDAY_22ND,
+    REASONS_FOR_AFTERNOON,
+    REASONS_FOR_WEEKEND,
+    REASONS_FOR_DAY_BEFORE_CHRISTMAS,
+    REASONS_FOR_CHRISTMAS,
+    REASONS_NEW_YEAR
+  }
+
   if (time.naChristmasEve()) {
-    return REASONS_FOR_DAY_BEFORE_CHRISTMAS
+    return reasonSet.REASONS_FOR_DAY_BEFORE_CHRISTMAS
   }
 
   if (time.naChristmas()) {
-    return REASONS_FOR_CHRISTMAS
+    return reasonSet.REASONS_FOR_CHRISTMAS
   }
 
   if (time.naNewYear()) {
-    return REASONS_NEW_YEAR
+    return reasonSet.REASONS_NEW_YEAR
   }
 
   if (time.naFriday22nd()) {
-    return REASONS_FOR_FRIDAY_22ND
+    return reasonSet.REASONS_FOR_FRIDAY_22ND
   }
 
   if (time.naFridayAfternoon()) {
-    return REASONS_FOR_FRIDAY_AFTERNOON
+    return reasonSet.REASONS_FOR_FRIDAY_AFTERNOON
   }
 
   if (time.naFriday()) {
-    return REASONS_TO_NOT_DEPLOY
+    return reasonSet.REASONS_TO_NOT_DEPLOY
   }
 
   if (time.naThursdayAfternoon()) {
-    return REASONS_FOR_THURSDAY_AFTERNOON
+    return reasonSet.REASONS_FOR_THURSDAY_AFTERNOON
   }
 
   if (time.naWeekend()) {
-    return REASONS_FOR_WEEKEND
+    return reasonSet.REASONS_FOR_WEEKEND
   }
 
   if (time.naAfternoon()) {
-    return REASONS_FOR_AFTERNOON
+    return reasonSet.REASONS_FOR_AFTERNOON
   }
 
-  return REASONS_TO_DEPLOY
+  return reasonSet.REASONS_TO_DEPLOY
 }

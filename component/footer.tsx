@@ -39,8 +39,8 @@ const Footer = (props: IFooter) => {
 
   return (
     <>
-      <ul className="footer-list">
-          <span className="footer-label">{t('share')}</span>{' '}
+      <ul className="footer-list" suppressHydrationWarning>
+        <span className="footer-label">{t('share')}</span>{' '}
         <li>
           <a
             href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmakeideploy.today%2F&t=Make%20I%20Deploy%20Today%3F"

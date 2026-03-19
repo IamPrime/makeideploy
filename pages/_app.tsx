@@ -3,6 +3,12 @@ import type { AppProps } from 'next/app'
 import '../style.css'
 import { useRouter } from 'next/router'
 import pcmMessages from '../locales/pcm.json'
+import swMessages from '../locales/sw.json'
+import yoMessages from '../locales/yo.json'
+import igMessages from '../locales/ig.json'
+import haMessages from '../locales/ha.json'
+import zuMessages from '../locales/zu.json'
+import amMessages from '../locales/am.json'
 
 type Messages = Record<string, string>
 
@@ -14,16 +20,33 @@ export const I18nContext = React.createContext<{
 
 const AFRICAN_LOCALES = ['sw', 'yo', 'ig', 'ha', 'zu', 'am', 'pcm']
 
+const localeMap: Record<string, Messages> = {
+  pcm: pcmMessages,
+  sw: swMessages,
+  yo: yoMessages,
+  ig: igMessages,
+  ha: haMessages,
+  zu: zuMessages,
+  am: amMessages
+}
+
 function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
-  const [locale, setLocaleState] = React.useState<string>(() => {
-    const saved = typeof window !== 'undefined' ? localStorage.getItem('locale') : null
-    if (saved) return saved
-    const nav = typeof navigator !== 'undefined' ? navigator.language : 'pcm'
-    const base = (nav || 'pcm').split('-')[0]
-    return AFRICAN_LOCALES.includes(base) ? base : 'pcm'
-  })
-  const [messages, setMessages] = React.useState<Messages>(pcmMessages || {})
+  const [locale, setLocaleState] = React.useState<string>('pcm')
+  const [messages, setMessages] = React.useState<Messages>(pcmMessages)
+
+  // After hydration, restore locale from localStorage (can't read it on server)
+  React.useEffect(() => {
+    const saved = localStorage.getItem('locale')
+    if (saved && AFRICAN_LOCALES.includes(saved)) {
+      setLocaleState(saved)
+      return
+    }
+    const base = navigator.language.split('-')[0]
+    if (AFRICAN_LOCALES.includes(base)) {
+      setLocaleState(base)
+    }
+  }, [])
 
   React.useEffect(() => {
     const q = (router && router.query && (router.query.lng as string)) || undefined
@@ -42,30 +65,8 @@ function App({ Component, pageProps }: AppProps) {
   }
 
   React.useEffect(() => {
-    let cancelled = false
-    const load = async () => {
-      try {
-        const mod = await import(`../locales/${locale}.json`)
-        if (!cancelled) setMessages(mod.default || mod)
-        return
-      } catch (e) {}
-      try {
-        const mod = await import('../locales/pcm.json')
-        if (!cancelled) setMessages(mod.default || mod)
-        return
-      } catch (e) {}
-      try {
-        const mod = await import('../locales/en.json')
-        if (!cancelled) setMessages(mod.default || mod)
-        return
-      } catch (err) {
-        if (!cancelled) setMessages({})
-      }
-    }
-    load()
-    return () => {
-      cancelled = true
-    }
+    const newMessages = localeMap[locale] || pcmMessages
+    setMessages(newMessages)
   }, [locale])
 
   const t = (key: string, vars?: Record<string, string>) => {
