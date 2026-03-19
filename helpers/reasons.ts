@@ -120,6 +120,20 @@ export const buildReasons = (t: (key: string) => string) => {
     t('reason_newyear_3')
   ]
 
+  const REASONS_FOR_BIRTHDAY_EVE = [
+    t('reason_birthday_eve_0'),
+    t('reason_birthday_eve_1'),
+    t('reason_birthday_eve_2'),
+    t('reason_birthday_eve_3')
+  ]
+
+  const REASONS_FOR_BIRTHDAY = [
+    t('reason_birthday_0'),
+    t('reason_birthday_1'),
+    t('reason_birthday_2'),
+    t('reason_birthday_3')
+  ]
+
   return {
     REASONS_TO_DEPLOY,
     REASONS_TO_NOT_DEPLOY,
@@ -130,7 +144,9 @@ export const buildReasons = (t: (key: string) => string) => {
     REASONS_FOR_WEEKEND,
     REASONS_FOR_DAY_BEFORE_CHRISTMAS,
     REASONS_FOR_CHRISTMAS,
-    REASONS_NEW_YEAR
+    REASONS_NEW_YEAR,
+    REASONS_FOR_BIRTHDAY_EVE,
+    REASONS_FOR_BIRTHDAY
   }
 }
 

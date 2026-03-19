@@ -73,6 +73,14 @@ export function dayHelper(
     return reasonSet.REASONS_NEW_YEAR
   }
 
+  if (time.naBirthdayEve()) {
+    return reasonSet.REASONS_FOR_BIRTHDAY_EVE
+  }
+
+  if (time.naBirthday()) {
+    return reasonSet.REASONS_FOR_BIRTHDAY
+  }
+
   if (time.naFriday22nd()) {
     return reasonSet.REASONS_FOR_FRIDAY_22ND
   }

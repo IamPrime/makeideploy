@@ -169,6 +169,24 @@ export default class Time {
   }
 
   /**
+   * Today na the day before the birthday (Feb 12)?
+   * @returns boolean
+   */
+  naBirthdayEve(): boolean {
+    const d = this.getDate()
+    return d.getMonth() === 1 && d.getDate() === 12
+  }
+
+  /**
+   * Today na the birthday (Feb 13)?
+   * @returns boolean
+   */
+  naBirthday(): boolean {
+    const d = this.getDate()
+    return d.getMonth() === 1 && d.getDate() === 13
+  }
+
+  /**
    * Check if na any holiday
    * @returns boolean
    */
