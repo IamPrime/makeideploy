@@ -1,4 +1,5 @@
 import Time from './time'
+import type { buildReasons } from './reasons'
 import {
   REASONS_TO_DEPLOY,
   REASONS_TO_NOT_DEPLOY,
@@ -63,18 +64,7 @@ export const getRandom = function ranDay(list: string | string[]) {
  */
 export function dayHelper(
   time: Time,
-  reasons?: {
-    REASONS_TO_DEPLOY: string[]
-    REASONS_TO_NOT_DEPLOY: string[]
-    REASONS_FOR_THURSDAY_AFTERNOON: string[]
-    REASONS_FOR_FRIDAY_AFTERNOON: string[]
-    REASONS_FOR_FRIDAY_22ND: string[]
-    REASONS_FOR_AFTERNOON: string[]
-    REASONS_FOR_WEEKEND: string[]
-    REASONS_FOR_DAY_BEFORE_CHRISTMAS: string[]
-    REASONS_FOR_CHRISTMAS: string[]
-    REASONS_NEW_YEAR: string[]
-  }
+  reasons?: ReturnType<typeof buildReasons>
 ) {
   time = time || new Time(time)
 
