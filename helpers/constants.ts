@@ -1,17 +1,8 @@
 import Time from './time'
-import type { buildReasons } from './reasons'
-import {
-  REASONS_TO_DEPLOY,
-  REASONS_TO_NOT_DEPLOY,
-  REASONS_FOR_THURSDAY_AFTERNOON,
-  REASONS_FOR_FRIDAY_AFTERNOON,
-  REASONS_FOR_FRIDAY_22ND,
-  REASONS_FOR_AFTERNOON,
-  REASONS_FOR_WEEKEND,
-  REASONS_FOR_DAY_BEFORE_CHRISTMAS,
-  REASONS_FOR_CHRISTMAS,
-  REASONS_NEW_YEAR
-} from './reasons'
+import { buildReasons } from './reasons'
+import pcmMessages from '../locales/pcm.json'
+
+const pcmReasons = buildReasons((key) => (pcmMessages as Record<string, string>)[key] || key)
 
 export function getBaseUrl() {
   if (typeof window !== 'undefined') return ''
@@ -68,19 +59,7 @@ export function dayHelper(
 ) {
   time = time || new Time(time)
 
-  // Use provided localized reasons or fallback to hardcoded English ones
-  const reasonSet = reasons || {
-    REASONS_TO_DEPLOY,
-    REASONS_TO_NOT_DEPLOY,
-    REASONS_FOR_THURSDAY_AFTERNOON,
-    REASONS_FOR_FRIDAY_AFTERNOON,
-    REASONS_FOR_FRIDAY_22ND,
-    REASONS_FOR_AFTERNOON,
-    REASONS_FOR_WEEKEND,
-    REASONS_FOR_DAY_BEFORE_CHRISTMAS,
-    REASONS_FOR_CHRISTMAS,
-    REASONS_NEW_YEAR
-  }
+  const reasonSet = reasons || pcmReasons
 
   if (time.naChristmasEve()) {
     return reasonSet.REASONS_FOR_DAY_BEFORE_CHRISTMAS

@@ -33,7 +33,6 @@ const localeMap: Record<string, Messages> = {
 function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
   const [locale, setLocaleState] = React.useState<string>('pcm')
-  const [messages, setMessages] = React.useState<Messages>(pcmMessages)
 
   // After hydration, restore locale from localStorage (can't read it on server)
   React.useEffect(() => {
@@ -64,10 +63,7 @@ function App({ Component, pageProps }: AppProps) {
     } catch (e) {}
   }
 
-  React.useEffect(() => {
-    const newMessages = localeMap[locale] || pcmMessages
-    setMessages(newMessages)
-  }, [locale])
+  const messages = localeMap[locale] || pcmMessages
 
   const t = (key: string, vars?: Record<string, string>) => {
     const raw = messages[key] || key

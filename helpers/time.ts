@@ -5,12 +5,10 @@ export default class Time {
 
   constructor(timezone: string | null = null, customDate?: string) {
     this.timezone = timezone || Intl.DateTimeFormat().resolvedOptions().timeZone
-    this.customDate = new Date(customDate + 'T00:00:00Z')
     if (customDate) {
       const utcDate = new Date(customDate + 'T00:00:00Z')
       const offset = utcDate.getTimezoneOffset() * 60 * 1000
-      const adjustedDate = new Date(utcDate.getTime() + offset)
-      this.customDate = adjustedDate
+      this.customDate = new Date(utcDate.getTime() + offset)
     } else {
       this.customDate = null
     }
@@ -136,7 +134,8 @@ export default class Time {
    * @return boolean
    */
   naWeekend(): boolean {
-    return this.getDate().getDay() === 6 || this.getDate().getDay() === 0
+    const day = this.getDate().getDay()
+    return day === 6 || day === 0
   }
 
   /**
@@ -144,11 +143,8 @@ export default class Time {
    * @returns boolean
    */
   naChristmasEve(): boolean {
-    return (
-      this.getDate().getMonth() === 11 &&
-      this.getDate().getDate() === 24 &&
-      this.getDate().getHours() >= 16
-    )
+    const d = this.getDate()
+    return d.getMonth() === 11 && d.getDate() === 24 && d.getHours() >= 16
   }
 
   /**
@@ -156,7 +152,8 @@ export default class Time {
    * @returns boolean
    */
   naChristmas(): boolean {
-    return this.getDate().getMonth() === 11 && this.getDate().getDate() === 25
+    const d = this.getDate()
+    return d.getMonth() === 11 && d.getDate() === 25
   }
 
   /**
@@ -164,11 +161,10 @@ export default class Time {
    * @returns boolean
    */
   naNewYear(): boolean {
+    const d = this.getDate()
     return (
-      (this.now().getMonth() === 11 &&
-        this.now().getDate() === 31 &&
-        this.now().getHours() >= 16) ||
-      (this.now().getMonth() === 0 && this.now().getDate() === 1)
+      (d.getMonth() === 11 && d.getDate() === 31 && d.getHours() >= 16) ||
+      (d.getMonth() === 0 && d.getDate() === 1)
     )
   }
 
