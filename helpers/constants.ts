@@ -6,9 +6,8 @@ const pcmReasons = buildReasons((key) => (pcmMessages as Record<string, string>)
 
 export function getBaseUrl() {
   if (typeof window !== 'undefined') return ''
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`
-  if (process.env.NODE_ENV === 'production')
-    return 'https://makeideploy.today'
   return `http://localhost:${process.env.PORT ?? 3001}`
 }
 
