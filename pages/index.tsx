@@ -74,7 +74,7 @@ const Page: React.FC<IPage> = ({ tz, now: initialNow, initialReason }) => {
           href={makeIDeployFavIcon(now)}
           sizes="32x32"
         />
-        <meta property="og:image" content={`${getBaseUrl()}/api/og`} />
+        <meta property="og:image" content={`${getBaseUrl()}/api/og?lng=${locale}`} />
       </Head>
       <div className={`wrapper ${!makeIDeploy(now) && 'its-friday'}`}>
         <Widget key={now.timezone} reason={reason} now={now} onNewReason={pickNewReason} />

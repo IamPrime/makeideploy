@@ -111,10 +111,10 @@ const Footer = (props: IFooter) => {
       </ul>
       <ul className="footer-list footer-api">
         <li>
-          <a href={'/api?tz=' + props.timezone}>API</a>
+          <a href={`/api?tz=${props.timezone}&lng=${locale}`}>API</a>
         </li>
         <li>
-          <a href={'/api/slack?tz=' + props.timezone}>Slack API</a>
+          <a href={`/api/slack?tz=${props.timezone}&lng=${locale}`}>Slack API</a>
         </li>
       </ul>
     </>

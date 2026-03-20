@@ -7,26 +7,41 @@ import {
   makeIDeployFontTheme
 } from '../../helpers/constants'
 import Time from '../../helpers/time'
+import { getLocalizedReasons, SUPPORTED_LOCALES } from '../../helpers/locale'
 
 export const config = {
   runtime: 'edge'
 }
 
-const font = fetch(
+const generalSans = fetch(
   new URL('../../public/fonts/GeneralSans-Bold.otf', import.meta.url)
 ).then((res) => res.arrayBuffer())
 
-export default async function handler(
-  req: { query?: { tz?: string; date?: string } } = {}
-) {
-  const fontData = await font
-  const queryTz = req.query?.tz as string | undefined
-  const queryDate = req.query?.date as string | undefined
+const notoSans = fetch(
+  new URL('../../public/fonts/NotoSans-Bold.ttf', import.meta.url)
+).then((res) => res.arrayBuffer())
+
+const notoSansEthiopic = fetch(
+  new URL('../../public/fonts/NotoSansEthiopic-Bold.ttf', import.meta.url)
+).then((res) => res.arrayBuffer())
+
+export default async function handler(req: Request) {
+  const [generalSansData, notoSansData, notoSansEthiopicData] = await Promise.all([
+    generalSans,
+    notoSans,
+    notoSansEthiopic
+  ])
+  const { searchParams } = new URL(req.url)
+  const queryTz = searchParams.get('tz') ?? undefined
+  const queryDate = searchParams.get('date') ?? undefined
+  const queryLng = searchParams.get('lng') ?? undefined
+  const lng = queryLng && SUPPORTED_LOCALES.includes(queryLng) ? queryLng : 'pcm'
   let timezone =
     queryTz && Time.zoneExists(queryTz) ? queryTz : Time.DEFAULT_TIMEZONE
   let time = queryDate
     ? new Time(timezone, queryDate)
     : Time.validOrNull(timezone)
+  const reasons = getLocalizedReasons(lng)
 
   return new ImageResponse(
     <div
@@ -124,24 +139,21 @@ export default async function handler(
           width: 'auto',
           maxWidth: '85%',
           textAlign: 'center',
-          fontFamily: '"GeneralSans"',
+          fontFamily: '"GeneralSans", "NotoSans", "NotoSansEthiopic"',
           lineHeight: 1.2,
           textTransform: 'uppercase'
         }}
       >
-        {time && getRandom(dayHelper(time))}
+        {time && getRandom(dayHelper(time, reasons))}
       </div>
     </div>,
     {
       width: 1200,
       height: 630,
       fonts: [
-        {
-          name: 'GeneralSans',
-          data: fontData,
-          weight: 700,
-          style: 'normal'
-        }
+        { name: 'GeneralSans', data: generalSansData, weight: 700, style: 'normal' },
+        { name: 'NotoSans', data: notoSansData, weight: 700, style: 'normal' },
+        { name: 'NotoSansEthiopic', data: notoSansEthiopicData, weight: 400, style: 'normal' }
       ]
     }
   )

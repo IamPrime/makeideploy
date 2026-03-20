@@ -16,7 +16,8 @@ const Head = () => {
         content="E Good Make I Deploy Today? | Reminder for all dem Developers, Designers and Ogas at the top"
       />
 
-      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image" content="https://makeideploy.today/api/og" />
       <meta name="twitter:title" content="Make I Deploy Today?" />
       <meta
         name="twitter:description"

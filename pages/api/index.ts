@@ -1,12 +1,16 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import Time from '../../helpers/time'
-import { getRandom, dayHelper, makeIDeploy } from '../../helpers/constants'
+import { getRandom, dayHelper, makeIDeploy, makeIDeployColorTheme } from '../../helpers/constants'
+import { getLocalizedReasons, getMessages, SUPPORTED_LOCALES } from '../../helpers/locale'
 
 type ApiResponse = {
   error?: { message: string; type: string; code: number }
   timezone?: string
   date?: string
+  lng?: string
+  tagline?: string
   makeideploy?: boolean | null
+  color?: string
   message?: string
 }
 
@@ -25,16 +29,12 @@ const allowCors =
     return await fn(req, res)
   }
 
-const handler = async (
-  req: NextApiRequest,
-  res: {
-    status: (response: number) => {
-      json: (response: ApiResponse) => void
-    }
-  }
-) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse<ApiResponse>) => {
   const timezone = (req.query.tz as string) || Time.DEFAULT_TIMEZONE
   const customDate = req.query.date as string
+  const lng = SUPPORTED_LOCALES.includes(req.query.lng as string)
+    ? (req.query.lng as string)
+    : 'pcm'
 
   if (!Time.zoneExists(timezone)) {
     return res.status(400).json({
@@ -46,18 +46,21 @@ const handler = async (
     })
   }
 
-  const parsedDate = customDate
-    ? new Date(customDate).toISOString().split('T')[0]
-    : undefined
-  const time = parsedDate ? new Time(timezone, parsedDate) : new Time(timezone)
+  const date = customDate ? new Date(customDate) : null
+  const time = date
+    ? new Time(timezone, date.toISOString().split('T')[0])
+    : new Time(timezone)
+  const reasons = getLocalizedReasons(lng)
+  const messages = getMessages(lng)
 
   res.status(200).json({
-    timezone: timezone,
-    date: customDate
-      ? new Date(customDate).toISOString()
-      : time.now().toISOString(),
+    timezone,
+    date: (date ?? time.getDate()).toISOString(),
+    lng,
+    tagline: messages['tagline'],
     makeideploy: makeIDeploy(time),
-    message: getRandom(dayHelper(time))
+    color: makeIDeployColorTheme(time),
+    message: getRandom(dayHelper(time, reasons))
   })
 }
 
