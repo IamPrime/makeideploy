@@ -8,42 +8,33 @@ import {
 } from '../../helpers/constants'
 import Time from '../../helpers/time'
 import { getLocalizedReasons, SUPPORTED_LOCALES } from '../../helpers/locale'
+import { NextApiRequest, NextApiResponse } from 'next'
+import fs from 'fs'
+import path from 'path'
 
-export const config = {
-  runtime: 'edge'
-}
+const generalSansData = fs.readFileSync(
+  path.join(process.cwd(), 'public/fonts/GeneralSans-Bold.otf')
+)
+const notoSansData = fs.readFileSync(
+  path.join(process.cwd(), 'public/fonts/NotoSans-Bold.ttf')
+)
+const notoSansEthiopicData = fs.readFileSync(
+  path.join(process.cwd(), 'public/fonts/NotoSansEthiopic-Bold.ttf')
+)
 
-const generalSans = fetch(
-  new URL('../../public/fonts/GeneralSans-Bold.otf', import.meta.url)
-).then((res) => res.arrayBuffer())
-
-const notoSans = fetch(
-  new URL('../../public/fonts/NotoSans-Bold.ttf', import.meta.url)
-).then((res) => res.arrayBuffer())
-
-const notoSansEthiopic = fetch(
-  new URL('../../public/fonts/NotoSansEthiopic-Bold.ttf', import.meta.url)
-).then((res) => res.arrayBuffer())
-
-export default async function handler(req: Request) {
-  const [generalSansData, notoSansData, notoSansEthiopicData] = await Promise.all([
-    generalSans,
-    notoSans,
-    notoSansEthiopic
-  ])
-  const { searchParams } = new URL(req.url)
-  const queryTz = searchParams.get('tz') ?? undefined
-  const queryDate = searchParams.get('date') ?? undefined
-  const queryLng = searchParams.get('lng') ?? undefined
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const queryTz = req.query.tz as string | undefined
+  const queryDate = req.query.date as string | undefined
+  const queryLng = req.query.lng as string | undefined
   const lng = queryLng && SUPPORTED_LOCALES.includes(queryLng) ? queryLng : 'pcm'
-  let timezone =
+  const timezone =
     queryTz && Time.zoneExists(queryTz) ? queryTz : Time.DEFAULT_TIMEZONE
-  let time = queryDate
+  const time = queryDate
     ? new Time(timezone, queryDate)
     : Time.validOrNull(timezone)
   const reasons = getLocalizedReasons(lng)
 
-  return new ImageResponse(
+  const imageResponse = new ImageResponse(
     <div
       style={{
         display: 'flex',
@@ -157,4 +148,9 @@ export default async function handler(req: Request) {
       ]
     }
   )
+
+  const buffer = Buffer.from(await (imageResponse as unknown as Response).arrayBuffer())
+  res.setHeader('Content-Type', 'image/png')
+  res.setHeader('Cache-Control', 'public, max-age=31536000, immutable')
+  res.send(buffer)
 }
