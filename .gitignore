@@ -13,3 +13,5 @@ public/bundle.js
 .vercel
 .idea
 SHOULDIDEPLOY.md
+build/
+.claude/
