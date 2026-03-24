@@ -44,7 +44,16 @@ Remove the `-- --watch` flag if you wan stop the watch process.
 
 ## How person fit change the helper files
 
-1. First-first, change the `constants.ts` file.  
+1. To add or edit reasons, change the locale JSON file for your language inside `locales/` (e.g. `locales/pcm.json`).
+   All the reason keys start with `reason_` prefix.
+
+2. If you dey add new logic (new day rule, new special date):
+   - Add the check to `helpers/time.ts`
+   - Add the reason array to `helpers/reasons.ts` (`buildReasons` function)
+   - Add the condition to `dayHelper` in `helpers/constants.ts`
+   - Add the translation keys to all 7 locale JSON files in `locales/`
+
+3. First-first, change the `constants.ts` file.
 This na because the changes wey you dun make for `time.ts` and `reasons.ts` files go affect am.
 
 Alright, make I rewrite am for you for pidgin:

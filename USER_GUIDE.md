@@ -8,20 +8,34 @@ We dey check:
 - **Which day be today** (Friday? e no too good 😅)
 - **Wetin time be** (Afternoon dey risky pass)
 - **Holidays** (Christmas, New Year, all dat)
-- **Special dates** (Friday wey be 22nd, na special koko)
-- **Your timezone** (Wetin time dey for your side?)
+- **Special dates** (Friday wey be 22nd, na special koko; February 12-13, na my birthday)
+- **Your timezone** (Wetin time dey talk for your side?)
+- **Your language** (Nigerian Pidgin, Swahili, Yoruba, Igbo, Hausa, Zulu, Amharic)
 
 ---
 
 ## For People Wey Dey Use Website 🌐
 
-### Quick Quick Start
+### Quick Start
 
-1. Comot phone or laptop, open https://makeideploy.today
+1. Comot phone or laptop, open [Make I Deploy](https://makeideploy.today)
 2. You go see question: **"Make I Deploy Today?"**
 3. E go show you Pidgin reason say yes or no
 
 ### How You Go Use Am
+
+#### **Change Your Language**
+
+For bottom of page you go see language selector. Pick from 7 African languages:
+- **PCM** — Nigerian Pidgin (default)
+- **SW** — Swahili
+- **YO** — Yoruba
+- **IG** — Igbo
+- **HA** — Hausa
+- **ZU** — Zulu
+- **AM** — Amharic
+
+Your choice go save for browser, so next time you open the page e go remember.
 
 #### **Change Your Timezone**
 
@@ -29,11 +43,11 @@ For bottom of page you go see dropdown wey say "Timezone". Select your timezone 
 - Pick from list (e.g. `Africa/Lagos`, `America/New_York`, `Asia/Tokyo`)
 - The reason and color go change quick quick
 - URL go add `?tz=Your/Timezone` so you fit share am with your people
-- Share link make your bros see wetin their timezone get
+- Share link make your bros and sistas see wetin their timezone get
 
 #### **Get New Reason**
 
-Press **Space** key or click somewhere for page to get another random reason. E fit show same thing again (na random ini), so keep trying.
+Press **Space** key or click somewhere for page to get another random reason. E fit show same thing again (na random ), so carry go.
 
 #### **Color Meaning**
 
@@ -54,6 +68,8 @@ E go tell you "Yes, deploy na" if:
 - ✔️ No be Christmas, New Year, or any holiday
 - ✔️ Time no pass 4PM (16:00)
 - ✔️ No be 22nd of any month (especially Friday 22nd wey be cursed 🧿)
+- ✔️ No be my birthday eve or birthday (February 13th wey be special day)
+
 
 ### When E Go Say "No"?
 
@@ -64,6 +80,8 @@ E go give you "No be today" reason if ANY of these happen:
 - Time don pass **4PM** (afternoon danger zone dey there)
 - Na **Thursday late afternoon** (time run close to Friday)
 - Na **22nd day** (especially if Friday 22nd)
+- Na **February 12th** (birthday eve — stop work, go celebrate)
+- Na **February 13th** (birthday — it's a special day, no deploy)
 
 ### Example Reasons
 
@@ -88,7 +106,7 @@ E go give you "No be today" reason if ANY of these happen:
 You fit use API make you add this tool for your CI/CD, bots or tools wey you dey build.
 
 #### **Base URL**
-```
+```url
 https://makeideploy.today/api
 ```
 
@@ -96,29 +114,37 @@ https://makeideploy.today/api
 
 | Parameter | Required | Example | Default |
 |-----------|----------|---------|---------|
-| `tz` | No | `Africa/Lagos` | `UTC` |
-| `date` | No | `2024-11-18` | Today |
+| `tz`      |     No   | `Africa/Lagos` | `UTC` |
+| `date`    |     No   | `2024-11-18` | Today |
+| `lng`     |     No   | `sw` | `pcm` |
+
+Supported `lng` values: `pcm`, `sw`, `yo`, `ig`, `ha`, `zu`, `am`
 
 #### **Examples**
 
-**1) Default one (UTC, today)**
-```
+**1. Default one (UTC, today)**
+```bash
 GET https://makeideploy.today/api
 ```
 
-**2) Use your timezone**
-```
+**2. Use your timezone**
+```bash
 GET https://makeideploy.today/api?tz=Africa/Lagos
 ```
 
-**3) Check specific date**
-```
+**3. Check specific date**
+```bash
 GET https://makeideploy.today/api?date=2024-11-18
 ```
 
-**4) Specific date plus your timezone**
-```
+**4. Specific date plus your timezone**
+```bash
 GET https://makeideploy.today/api?tz=America/Chicago&date=2024-11-18
+```
+
+**5. Specific language**
+```bash
+GET https://makeideploy.today/api?tz=Africa/Nairobi&lng=sw
 ```
 
 #### **Response JSON Format**
@@ -129,7 +155,10 @@ API go return you JSON wey look like dis:
 {
   "timezone": "Africa/Lagos",
   "date": "2024-11-18T00:00:00.000Z",
+  "lng": "pcm",
+  "tagline": "Make I Deploy Today?",
   "makeideploy": true,
+  "color": "#2ecc40",
   "message": "I no see why you no go do am"
 }
 ```
@@ -137,8 +166,11 @@ API go return you JSON wey look like dis:
 **Field Explanations:**
 - `timezone` — Timezone wey you ask for
 - `date` — The date/time for ISO format
+- `lng` — Language/locale wey dey active
+- `tagline` — App tagline for that locale
 - `makeideploy` — true mean safe, false mean no
-- `message` — Random Pidgin reason wey API pick
+- `color` — Hex color wey match deploy status
+- `message` — Random reason wey API pick for that locale
 
 #### **cURL Example**
 
@@ -164,36 +196,49 @@ curl "https://makeideploy.today/api?tz=America/New_York&date=2024-11-22"
 You fit use Slack slash command make your team check before dem dey deploy.
 
 #### **Slack API Endpoint**
-```
+```url
 https://makeideploy.today/api/slack
 ```
 
+#### **Query Parameters**
+
+| Parameter | Example | Wetin He Do |
+|-----------|---------|------------|
+| `tz`      | `Africa/Lagos` | Timezone for response |
+| `lng`     | `yo`    | Language for response |
+
 #### **How to Set Am Up**
 
-1. Go Slack API Dashboard and create app from scratch
-2. Add Slash Command na `/deploy` (or wetin you wan)
-3. Request URL: `https://makeideploy.today/api/slack`
-4. Short Description: `Should I deploy today?`
-5. Save and install app for your workspace
+1. Go to [api.slack.com/apps](https://api.slack.com/apps) and create a new app from scratch
+2. Go to **Slash Commands** and click **Create New Command**
+3. Set **Command** to `/deploy` (or any name you want)
+4. Set **Request URL** to:
+   ```
+   https://makeideploy.today/api/slack?lng=pcm
+   ```
+   Change `pcm` to your preferred language (`sw`, `yo`, `ig`, `ha`, `zu`, `am`)
+5. Set **Short Description** to `Should I deploy today?`
+6. Save and install app for your workspace
+
+> **Note:** Language (`lng`) is fixed in the Request URL — set it once when you configure the app. Different workspaces or channels can have different language configs.
 
 #### **How to Use Am for Slack**
 
-Just type this for Slack:
-```
+After setup, type this for Slack with your timezone:
+
+``` 
 /deploy Africa/Lagos
 ```
 
-E go show you something like dis:
+Slack go send `Africa/Lagos` to the API as the timezone. E go show everybody in channel:
 
 ```
-Make I Deploy Today?
-═══════════════════════════════════════════════
 I no see why you no go do am
-
-makeideploy.today | Africa/Lagos
+─────────────────────────────
+Make I Deploy Today? | Africa/Lagos
 ```
 
-If timezone valid, everybody for channel go see am. If he invalid, only you go see message.
+If you type wrong timezone, only you go see the error message (ephemeral). If you type nothing, e go use UTC.
 
 ---
 
@@ -212,6 +257,7 @@ https://makeideploy.today/api/og
 |-----------|---------|------------|
 | `tz` | `Africa/Lagos` | Show reason for that timezone |
 | `date` | `2024-11-18` | Show reason for that date |
+| `lng` | `am` | Show reason in that language |
 
 #### **Examples How You Fit Use Am**
 
@@ -410,8 +456,8 @@ Use full `Region/City` format always.
 **Q: Na serious work or just joke?**  
 A: Ehhh, 50/50. Logic dey real (we check day, time, timezone, holidays) but reasons na laugh. Use am as reminder, no replace test abeg.
 
-**Q: I fit add my own reasons?**  
-A: Yessir! Go edit `helpers/reasons.ts` make you add your own Pidgin magic. Fork repo, send PR, we go review am.
+**Q: I fit add my own reasons?**
+A: Yessir! Go edit the locale JSON file for your language inside `locales/` folder (e.g. `locales/pcm.json` for Pidgin). Fork repo, send PR, we go review am.
 
 **Q: E fit predict if deployment go fail?**  
 A: No na. E na entertainment plus friendly advice. Always run tests first, make you no blame make-i-deploy.
@@ -456,8 +502,10 @@ Find bug? You get better reason? You want add feature?
 
 ### Core Files
 - `helpers/time.ts` — Time and timezone logic
-- `helpers/reasons.ts` — 300+ Pidgin messages
+- `helpers/reasons.ts` — Reason builder wey use locale messages
 - `helpers/constants.ts` — Deploy rules (the logic)
+- `helpers/locale.ts` — Server-side locale helper (shared by all APIs)
+- `locales/*.json` — All messages in each supported language
 - `components/widget.tsx` — UI component wey you see
 
 ### How Data Flow
@@ -481,8 +529,11 @@ Display (show on screen + color)
 ## Version History
 
 - **v2.0.0** — Pidgin English rewrite with timezone support complete
-- `initialReason` — Server compute reason before page load (better)
-- OG image params — Share timezone-specific preview
+- **v2.1.0** — Multi-language support: PCM, SW, YO, IG, HA, ZU, AM
+- **v2.2.0** — `lng` param added to all APIs (`/api`, `/api/slack`, `/api/og`)
+- **v2.2.0** — OG image now supports non-Latin scripts (Yoruba diacritics, Amharic Ethiopic)
+- **v2.2.0** — Birthday special reasons added for February 12–13
+- **v2.2.0** — API response includes `lng`, `tagline`, `color` fields
 
 ---
 

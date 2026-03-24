@@ -38,7 +38,7 @@ Dis na Pidgin English version of "shouldideploy" repo. We dey try make developer
 
 ## Add your reasons
 
-Reasons dey for [reasons.ts].
+Reasons dey inside the locale JSON files for `locales/` folder (e.g. `locales/pcm.json`, `locales/sw.json`). Edit the file wey match your language.
 
 ## API endpoint
 
@@ -49,6 +49,8 @@ You fit add some optional parameters wey go customize API response:
 - `tz`: Timezone wey you want use. Put correct timezone string, like `Africa/Lagos` or `America/Chicago`. Default na `UTC`.
 
 - `date`: Date wey you want check. Default na today. Put correct date string for this format `YYYY-MM-DD`, like `2024-11-18`.
+
+- `lng`: Language/locale wey you want. Supported values: `pcm`, `sw`, `yo`, `ig`, `ha`, `zu`, `am`. Default na `pcm`.
 
 ### Examples
 
@@ -76,13 +78,22 @@ Get the API response for a specific date (e.g., 2024-11-18) in a specific timezo
 https://makeideploy.today/api?tz=America/Chicago&date=2024-11-18
 ```
 
+Get the API response in Swahili:
+
+```url
+https://makeideploy.today/api?tz=Africa/Nairobi&lng=sw
+```
+
 ## API Response
 
 The API go give you JSON object wey get these keys:
 
 - `timezone`: Timezone wey you give for the request.
 - `date`: Date wey you provide for ISO format (YYYY-MM-DDTHH:mm:ss.sssZ).
+- `lng`: Language/locale wey dey active.
+- `tagline`: App tagline for that locale.
 - `makeideploy`: Boolean value wey go show if you suppose deploy today.
+- `color`: Hex color wey match current deploy status.
 - `message`: String/Message wey explain why you go or no go deploy.
 
 Example response:
@@ -91,7 +102,10 @@ Example response:
 {
   "timezone": "UTC",
   "date": "2024-11-18T00:00:00.000Z",
+  "lng": "pcm",
+  "tagline": "Make I Deploy Today?",
   "makeideploy": false,
+  "color": "#ff4136",
   "message": "Today na Monday, you suppose don deploy!"
 }
 ```
