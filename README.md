@@ -36,6 +36,31 @@ Dis na Pidgin English version of "shouldideploy" repo. We dey try make developer
   - `npm run dev` start dev server
   - `now dev` if you want use local serveless function (you go need "now")
 
+## 🧩 Chrome Extension
+
+Na quick way to check if you suppose deploy without opening browser website.
+
+### Setup for Development
+
+```bash
+npm run generate:icons  # Create extension icons
+```
+
+Then:
+1. Go to `chrome://extensions/`
+2. Enable Developer mode (toggle top right)
+3. Click "Load unpacked" 
+4. Select the `extension` folder
+5. Done! Icon go appear for you
+
+### Package for Chrome Web Store
+
+```bash
+npm run build:extension  # Create ZIP file for submission
+```
+
+See full documentation: [extension/README.md](extension/README.md) and [extension/QUICKSTART.md](extension/QUICKSTART.md)
+
 ## Add your reasons
 
 Reasons dey inside the locale JSON files for `locales/` folder (e.g. `locales/pcm.json`, `locales/sw.json`). Edit the file wey match your language.
@@ -113,6 +138,15 @@ Example response:
 ## Credits
 
 Favicon created by **emilegraphics** from the NOUN Project at [favicon-credit]
+
+## 🔐 Privacy Policy
+
+We respect your privacy. **The application and Chrome Extension collect zero personal data.**
+
+See our complete [PRIVACY_POLICY.md](PRIVACY_POLICY.md) for details on:
+- What data is collected (none for personal info)
+- How API calls work
+- Your data rights and our security practices
 
 ## License
 

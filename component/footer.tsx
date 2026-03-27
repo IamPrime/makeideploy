@@ -116,6 +116,16 @@ const Footer = (props: IFooter) => {
         <li>
           <a href={`/api/slack?tz=${props.timezone}&lng=${locale}`}>Slack API</a>
         </li>
+        <li>
+          <a
+            href="https://chromewebstore.google.com/detail/make-i-deploy-today/nldekfbfckiemikhokonkmifgknmilhg"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Install Chrome Extension"
+          >
+            🧩 Chrome Extension
+          </a>
+        </li>
       </ul>
     </>
   )

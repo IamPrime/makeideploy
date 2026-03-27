@@ -12,7 +12,9 @@
     "start": "next start",
     "test": "jest",
     "lint": "next lint --dir  pages --dir component --dir helpers --dir tests",
-    "format": "prettier-eslint --write $PWD/'**/*.js'"
+    "format": "prettier-eslint --write $PWD/'**/*.js'",
+    "generate:icons": "python extension/generate-icons.py",
+    "build:extension": "python extension/build-extension.py"
   },
   "dependencies": {
     "@vercel/og": "^1.0.0",
