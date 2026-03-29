@@ -3,7 +3,7 @@
   "name": "Make I Deploy Today?",
   "version": "1.0.0",
   "description": "Quick decision helper - Make I deploy today? Get instant Pidgin wisdom!",
-  "permissions": ["activeTab", "storage"],
+  "permissions": ["activeTab"],
   "action": {
     "default_title": "Make I deploy today?",
     "default_popup": "popup.html",
