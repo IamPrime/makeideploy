@@ -111,19 +111,29 @@ const Footer = (props: IFooter) => {
       </ul>
       <ul className="footer-list footer-api">
         <li>
-          <a href={`/api?tz=${props.timezone}&lng=${locale}`}>API</a>
+          <span className="footer-label">APIs:</span>{' '}
+          <a href={`/api?tz=${props.timezone}&lng=${locale}`}>REST</a>
+          {' | '}
+          <a href={`/api/slack?tz=${props.timezone}&lng=${locale}`}>Slack</a>
         </li>
         <li>
-          <a href={`/api/slack?tz=${props.timezone}&lng=${locale}`}>Slack API</a>
-        </li>
-        <li>
+          <span className="footer-label">🧩 Extensions:</span>{' '}
           <a
             href="https://chromewebstore.google.com/detail/make-i-deploy-today/nldekfbfckiemikhokonkmifgknmilhg"
             target="_blank"
             rel="noopener noreferrer"
             title="Install Chrome Extension"
           >
-            🧩 Chrome Extension
+            Chrome
+          </a>
+          {' | '}
+          <a
+            href="https://microsoftedge.microsoft.com/addons/detail/make-i-deploy-today/0RDCK9H32X02"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Install Edge Extension"
+          >
+            Edge
           </a>
         </li>
       </ul>
