@@ -113,13 +113,13 @@ const Footer = (props: IFooter) => {
       </ul>
       <ul className="footer-list footer-api">
         <li>
-          <span className="footer-label">APIs:</span>{' '}
+          <span className="footer-label">{t('api_label')}</span>{' '}
           <a href={`/api?tz=${props.timezone}&lng=${locale}`}>REST</a>
           {' | '}
           <a href={`/api/slack?tz=${props.timezone}&lng=${locale}`}>Slack</a>
         </li>
         <li>
-          <span className="footer-label">🧩 Extensions:</span>{' '}
+          <span className="footer-label">🧩 {t('extensions_label')}</span>{' '}
           <button
             className="link-as-button"
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
