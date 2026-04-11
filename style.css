@@ -17,6 +17,7 @@ body {
   --muted: #1c093f;
   --accent: #b4221b;
   --btn-border: #a3a3a3;
+  --dark-modal-link: #FFD966;
 }
 
 body.dark {
@@ -245,6 +246,12 @@ ul.footer-list select {
   margin: 1.5em 1em auto;
 }
 
+.highlight {
+  background: rgba(193, 181, 17, 0.4);
+  padding: 0.08rem 0.25rem;
+  border-radius: 3px;
+}
+
 @media (min-width: 800px) {
   .tagline {
     font: 300 3rem/2.8rem SFMono-Regular, Menlo, Monaco, Consolas,
@@ -382,7 +389,7 @@ body.dark .modal-overlay code {
 }
 
 body.dark .modal-overlay a {
-  color: #FFD966; /* warm yellow with strong contrast on dark bg */
+  color: var(--dark-modal-link); /* warm yellow with strong contrast on dark bg */
 }
 
 /* Slightly brighten on hover/focus to help affordance */

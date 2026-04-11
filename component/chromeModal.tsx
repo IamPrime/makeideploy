@@ -59,10 +59,10 @@ const ChromeModal: React.FC<ChromeModalProps> = ({ onClose }) => {
               github.com/IamPrime/makeideploy
             </a>
           </li>
-          <li>
-            Extract the folder (if zipped) and open <code>chrome://extensions</code> in Chrome.
+          <li className='modal-text'>
+            Extract the folder (if zipped) and open <span className='highlight'>chrome://extensions</span> in Chrome.
           </li>
-          <li>
+          <li className='modal-text'>
             Enable <strong>Developer mode</strong>, click <strong>Load unpacked</strong>, and select the extracted folder.
           </li>
         </ol>
