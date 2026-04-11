@@ -128,7 +128,7 @@ const Footer = (props: IFooter) => {
           </a>
           {' | '}
           <a
-            href="https://microsoftedge.microsoft.com/addons/detail/make-i-deploy-today/0RDCK9H32X02"
+            href="https://microsoftedge.microsoft.com/addons/detail/fbblnmmdgndkkgbkhmpjnjandodbgigp"
             target="_blank"
             rel="noopener noreferrer"
             title="Install Edge Extension"
