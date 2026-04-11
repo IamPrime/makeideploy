@@ -210,8 +210,39 @@ ul.footer-list a {
   font-weight: 600;
 }
 
+/* make buttons shown as links in footer match anchor styles */
+ul.footer-list .link-as-button {
+  background: transparent;
+  border: 0;
+  color: var(--text);
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+ul.footer-list .link-as-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+/* ensure the button matches anchor text sizing and flow */
+ul.footer-list .link-as-button {
+  font: inherit;
+  line-height: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  display: inline;
+  vertical-align: baseline;
+  text-decoration: none;
+}
+
 ul.footer-list select {
   max-width: 110px;
+}
+
+.modal-text {
+  margin: 1.5em 1em auto;
 }
 
 @media (min-width: 800px) {
@@ -303,6 +334,61 @@ ul.footer-list select {
   color: #1a1a1a;
   text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.1);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Modal styling to respect dark/light themes */
+.modal-overlay [role="dialog"] {
+  color: var(--text);
+  background: var(--bg);
+}
+
+.modal-overlay a {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.modal-overlay a:hover,
+.modal-overlay a:focus {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+.modal-overlay button[aria-label="Close"] {
+  color: var(--text);
+}
+
+.modal-overlay code {
+  color: inherit;
+  padding: 0.08rem 0.25rem;
+  border-radius: 3px;
+  background: rgba(0,0,0,0.06);
+}
+
+body.dark .modal-overlay code {
+  background: rgba(255,255,255,0.06);
+}
+
+/* Force pure white text for modal contents in dark mode */
+/* In dark mode: normal modal text is white, links use ADA-friendly yellow */
+body.dark .modal-overlay [role="dialog"],
+body.dark .modal-overlay button[aria-label="Close"],
+body.dark .modal-overlay h3,
+body.dark .modal-overlay p,
+body.dark .modal-overlay li,
+body.dark .modal-overlay ol,
+body.dark .modal-overlay strong,
+body.dark .modal-overlay code {
+  color: #FFFFFF;
+}
+
+body.dark .modal-overlay a {
+  color: #FFD966; /* warm yellow with strong contrast on dark bg */
+}
+
+/* Slightly brighten on hover/focus to help affordance */
+body.dark .modal-overlay a:hover,
+body.dark .modal-overlay a:focus {
+  color: #FFFFFF;
 }
 
 .reason {

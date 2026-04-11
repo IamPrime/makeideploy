@@ -1,5 +1,6 @@
 import React from 'react'
 import Timezone from './timezone'
+import ChromeModal from './chromeModal'
 import { I18nContext } from '../pages/_app'
 
 interface IFooter {
@@ -12,6 +13,7 @@ const Footer = (props: IFooter) => {
 
   const [theme, setTheme] = React.useState<string>('light')
   const [isMounted, setIsMounted] = React.useState<boolean>(false)
+  const [showChromeModal, setShowChromeModal] = React.useState<boolean>(false)
 
   React.useEffect(() => {
     // Load theme from localStorage after hydration
@@ -118,14 +120,17 @@ const Footer = (props: IFooter) => {
         </li>
         <li>
           <span className="footer-label">🧩 Extensions:</span>{' '}
-          <a
-            href="https://chromewebstore.google.com/detail/make-i-deploy-today/nldekfbfckiemikhokonkmifgknmilhg"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            className="link-as-button"
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              e.preventDefault()
+              setShowChromeModal(true)
+            }}
+            aria-label="Chrome extension"
             title="Install Chrome Extension"
           >
             Chrome
-          </a>
+          </button>
           {' | '}
           <a
             href="https://microsoftedge.microsoft.com/addons/detail/fbblnmmdgndkkgbkhmpjnjandodbgigp"
@@ -137,6 +142,7 @@ const Footer = (props: IFooter) => {
           </a>
         </li>
       </ul>
+      {showChromeModal && <ChromeModal onClose={() => setShowChromeModal(false)} />}
     </>
   )
 }
