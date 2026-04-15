@@ -2,6 +2,7 @@ import React from 'react'
 import type { AppProps } from 'next/app'
 import '../style.css'
 import { useRouter } from 'next/router'
+import { Analytics } from '@vercel/analytics/next'
 import pcmMessages from '../locales/pcm.json'
 import swMessages from '../locales/sw.json'
 import yoMessages from '../locales/yo.json'
@@ -74,6 +75,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <I18nContext.Provider value={{ t, locale, setLocale }}>
       <Component {...pageProps} />
+      <Analytics />
     </I18nContext.Provider>
   )
 }

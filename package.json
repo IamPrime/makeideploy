@@ -17,6 +17,7 @@
     "build:extension": "python extension/build-extension.py"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "@vercel/og": "^1.0.0",
     "date-fns": "^4.1.0",
     "next": "^16.1.7",

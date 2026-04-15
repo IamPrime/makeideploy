@@ -36,6 +36,48 @@ Dis na Pidgin English version of "shouldideploy" repo. We dey try make developer
   - `npm run dev` start dev server
   - `now dev` if you want use local serveless function (you go need "now")
 
+  ## Vercel Analytics (Next.js) — Quick setup
+
+  To start counting visitors and page views with Vercel Analytics:
+
+  1. Install the package:
+
+  ```bash
+  npm i @vercel/analytics
+  ```
+
+  2. Add the Analytics component to your app layout (we added it to `pages/_app.tsx`):
+
+  ```ts
+  import { Analytics } from '@vercel/analytics/next'
+
+  function App({ Component, pageProps }) {
+    return (
+      <>
+        <Component {...pageProps} />
+        <Analytics />
+      </>
+    )
+  }
+  ```
+
+  3. Deploy to Vercel and visit your site. Data should appear in the Vercel Analytics dashboard within ~30 seconds.
+
+  Notes:
+  - If you don't see data, check content blockers and navigate between pages to trigger pageviews.
+  - Vercel Analytics is designed for quick dashboards and insights — it does not provide raw event exports from the Vercel dashboard.
+
+  ## Retrieving or exporting analytics data
+
+  There is no official public API or raw-event export for Vercel Analytics that you can query outside the Vercel app. If you need exportable, event-level data for a case study, use one of these options instead:
+
+  - **GA4 + BigQuery** — let GA4 collect events and enable BigQuery export for raw events and SQL analysis.
+  - **PostHog** (self-hosted or cloud) — event-level tracking with CSV/SQL export and product analytics features.
+  - **Plausible** — privacy-friendly with CSV exports for simple reports.
+  - **Custom collector** — add a small tracking script that sends events to your own serverless API (Supabase/Postgres/BigQuery). This gives you full control and immediate CSV/SQL export.
+
+  If you want, I can add a minimal serverless `/api/track` handler and a small client script to persist `clientId` and events for export-ready data.
+
 ## 🧩 Chrome Extension
 
 Na quick way to check if you suppose deploy without opening browser website.
