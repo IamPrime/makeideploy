@@ -8,6 +8,23 @@ FOSSA Security Badge - [fossa-security-badge]
 
 Dis na Pidgin English version of "shouldideploy" repo. We dey try make developers, designers, and tech people laugh small before dem deploy code.
 
+### See Am For Yourself 👀
+
+<table>
+  <tr>
+    <td width="68%"><img src="docs/screenshots/makeideploy-desktop.png" alt="makeideploy.today on desktop: 'Make I Deploy Today?' with the answer 'SHIP AM!'"></td>
+    <td width="32%" rowspan="2"><img src="docs/screenshots/makeideploy-mobile.png" alt="makeideploy.today on a phone, with the footer stacked neatly"></td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/makeideploy-dark.png" alt="Dark mode: 'FOLLOW FLOW'"></td>
+  </tr>
+  <tr>
+    <td colspan="2"><img src="docs/screenshots/makeideploy-language.png" alt="The site in Yoruba, one of seven languages"></td>
+  </tr>
+</table>
+
+Light or dark, phone or laptop, and e dey speak seven languages: Pidgin, Swahili, Yoruba, Igbo, Hausa, Zulu and Amharic. 🎬 [Watch the short demo](docs/screenshots/makeideploy-demo.mp4), or go try am live for [makeideploy.today].
+
 ### How We Dey Roll 💻
 
 - We dey speak pure pidgin
