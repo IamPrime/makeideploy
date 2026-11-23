@@ -42,8 +42,8 @@ const Footer = (props: IFooter) => {
   return (
     <>
       <ul className="footer-list" suppressHydrationWarning>
-        <span className="footer-label">{t('share')}</span>{' '}
         <li>
+          <span className="footer-label">{t('share')}</span>{' '}
           <a
             href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmakeideploy.today%2F&t=Make%20I%20Deploy%20Today%3F"
             target="_blank"
@@ -52,8 +52,7 @@ const Footer = (props: IFooter) => {
           >
             Facebook
           </a>
-        </li>
-        <li>
+          {' | '}
           <a
             href="https://twitter.com/intent/tweet?source=https%3A%2F%2Fmakeideploy.today%2F&text=Make%20I%20Deploy%20Today%3F:%20https%3A%2F%2Fmakeideploy.today"
             target="_blank"
@@ -77,10 +76,7 @@ const Footer = (props: IFooter) => {
           <span className="footer-label">{t('timezone_label')}:</span>{' '}
           <Timezone onChange={props.changeTimezone} timezone={props.timezone} />
         </li>
-        <li
-          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
-          suppressHydrationWarning
-        >
+        <li suppressHydrationWarning>
           <span className="footer-label">
             {isMounted ? (theme === 'dark' ? t('dark') : t('light')) : t('light')}:
           </span>{' '}
@@ -93,7 +89,7 @@ const Footer = (props: IFooter) => {
           </button>
         </li>
         <li suppressHydrationWarning>
-          <label className="footer-label" style={{ marginLeft: '0.5rem', marginRight: '0.25rem' }}>
+          <label className="footer-label">
             {t('lang_label')}:
           </label>
           <select
