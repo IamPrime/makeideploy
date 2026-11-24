@@ -5,10 +5,11 @@ import names from '../helpers/timezones'
 interface ITimezone {
   onChange: (value: string) => void
   timezone: string
+  label: string
 }
 
 // This na our Timezone component
-const Timezone: React.FC<ITimezone> = ({ onChange, timezone }) => {
+const Timezone: React.FC<ITimezone> = ({ onChange, timezone, label }) => {
   const options = useMemo(() => {
     return names.map((name) => (
       <option value={name} key={name}>
@@ -21,7 +22,7 @@ const Timezone: React.FC<ITimezone> = ({ onChange, timezone }) => {
     <select
       value={timezone}
       onChange={(e) => onChange(e.target.value)}
-      aria-label="Wetin be your Timezone"
+      aria-label={label}
     >
       <option value="">Wetin be your Timezone</option>
       {options}

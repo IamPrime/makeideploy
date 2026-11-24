@@ -2,6 +2,7 @@ import React from 'react'
 import type { AppProps } from 'next/app'
 import '../style.css'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 import { Analytics } from '@vercel/analytics/next'
 import pcmMessages from '../locales/pcm.json'
 import swMessages from '../locales/sw.json'
@@ -64,6 +65,12 @@ function App({ Component, pageProps }: AppProps) {
     } catch (e) {}
   }
 
+  // Screen readers and font fallback follow <html lang>, so keep it in step
+  // with the active language (pcm, sw, yo, ig, ha, zu, am are valid tags).
+  React.useEffect(() => {
+    document.documentElement.lang = locale
+  }, [locale])
+
   const messages = localeMap[locale] || pcmMessages
 
   const t = (key: string, vars?: Record<string, string>) => {
@@ -74,6 +81,14 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <I18nContext.Provider value={{ t, locale, setLocale }}>
+      <Head>
+        {/* Next.js expects the viewport tag here, not in _document.
+            viewport-fit=cover lets the footer use the safe-area insets. */}
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
+      </Head>
       <Component {...pageProps} />
       <Analytics />
     </I18nContext.Provider>
