@@ -16,3 +16,11 @@ SHOULDIDEPLOY.md
 build/
 .claude/
 makeideploy-extension.zip
+
+# Impeccable: commit shared config (PRODUCT.md, .impeccable/live/config.json);
+# keep machine-local state out.
+.impeccable/config.local.json
+.impeccable/hook.cache.json
+.impeccable/shots/
+.impeccable/live/*
+!.impeccable/live/config.json
