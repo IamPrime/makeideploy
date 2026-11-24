@@ -20,9 +20,10 @@ interface IPage {
   tz: string
   now: { timezone: string; customDate: string }
   initialReason: string
+  origin: string
 }
 
-const Page: React.FC<IPage> = ({ tz, now: initialNow, initialReason }) => {
+const Page: React.FC<IPage> = ({ tz, now: initialNow, initialReason, origin }) => {
   const [timezone, setTimezone] = useState<string>(tz)
   const [now, setNow] = useState<any>(
     new Time(initialNow.timezone, initialNow.customDate)
@@ -65,6 +66,8 @@ const Page: React.FC<IPage> = ({ tz, now: initialNow, initialReason }) => {
     pickNewReason()
   }, [pickNewReason])
 
+  const deploy = makeIDeploy(now)
+
   return (
     <>
       <Head>
@@ -74,10 +77,38 @@ const Page: React.FC<IPage> = ({ tz, now: initialNow, initialReason }) => {
           href={makeIDeployFavIcon(now)}
           sizes="32x32"
         />
-        <meta property="og:image" content={`${getBaseUrl()}/api/og?lng=${locale}`} />
+        <meta property="og:image" content={`${origin}/api/og?lng=${locale}`} />
+        <meta name="twitter:image" content={`${origin}/api/og?lng=${locale}`} />
+        {/* Browser chrome matches the page: red on a "no" day, otherwise
+            the light or dark page colour. */}
+        {deploy ? (
+          <>
+            {/* Distinct keys: next/head otherwise keeps only one meta per name. */}
+            <meta
+              key="theme-color-light"
+              name="theme-color"
+              media="(prefers-color-scheme: light)"
+              content="#ffffff"
+            />
+            <meta
+              key="theme-color-dark"
+              name="theme-color"
+              media="(prefers-color-scheme: dark)"
+              content="#0b0f17"
+            />
+          </>
+        ) : (
+          <meta key="theme-color" name="theme-color" content="#b4221b" />
+        )}
       </Head>
-      <div className={`wrapper ${!makeIDeploy(now) && 'its-friday'}`}>
-        <Widget key={now.timezone} reason={reason} now={now} onNewReason={pickNewReason} />
+      <div className={deploy ? 'wrapper' : 'wrapper its-friday'}>
+        <Widget
+          key={now.timezone}
+          reason={reason}
+          now={now}
+          deploy={deploy}
+          onNewReason={pickNewReason}
+        />
         <div className="meta">
           <Footer timezone={timezone} changeTimezone={changeTimezone} />
         </div>
@@ -101,7 +132,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       tz: timezone,
       now: time ? time.toObject() : null,
-      initialReason: time ? getRandom(dayHelper(time)) : 'Invalid timezone'
+      initialReason: time ? getRandom(dayHelper(time)) : 'Invalid timezone',
+      // Resolved from the request, so it is right on any port or domain.
+      origin: getBaseUrl(context.req)
     }
   }
 }

@@ -4,7 +4,6 @@ const Head = () => {
   return (
     <>
       <meta charSet="utf-8" />
-      <meta name="viewport" content="width=device-width" />
       <meta
         name="description"
         content="E Good Make I Deploy Today? | Reminder for all dem Developers, Designers and Ogas at the top"
@@ -17,7 +16,6 @@ const Head = () => {
       />
 
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:image" content="https://makeideploy.today/api/og" />
       <meta name="twitter:title" content="Make I Deploy Today?" />
       <meta
         name="twitter:description"
@@ -32,8 +30,6 @@ const Head = () => {
       <meta property="og:url" content="https://makeideploy.today" />
       <meta property="og:site_name" content="E Good Make I Deploy Today?" />
       <meta property="og:type" content="website" />
-
-      <meta name="theme-color" content="#1E1F29" />
     </>
   )
 }

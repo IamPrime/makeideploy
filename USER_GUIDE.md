@@ -19,23 +19,29 @@ We dey check:
 ### Quick Start
 
 1. Comot phone or laptop, open [Make I Deploy](https://makeideploy.today)
-2. You go see question: **"Make I Deploy Today?"**
-3. E go show you Pidgin reason say yes or no
+2. You go see question: **"Make I Deploy Today?"** with the answer for side: **YES** or **NO**
+3. Under am, e go show you Pidgin reason wey go make you laugh
 
 ### How You Go Use Am
 
 #### **Change Your Language**
 
-For bottom of page you go see language selector. Pick from 7 African languages:
-- **PCM** — Nigerian Pidgin (default)
-- **SW** — Swahili
-- **YO** — Yoruba
-- **IG** — Igbo
-- **HA** — Hausa
-- **ZU** — Zulu
-- **AM** — Amharic
+For bottom of page you go see **Language** selector. Each language dey show for im own name, so you go find your own sharp sharp:
+- **Naijá** — Nigerian Pidgin (default)
+- **Kiswahili** — Swahili
+- **Yorùbá** — Yoruba
+- **Igbo** — Igbo
+- **Hausa** — Hausa
+- **isiZulu** — Zulu
+- **አማርኛ** — Amharic
 
-Your choice go save for browser, so next time you open the page e go remember.
+The whole page go change: question, YES/NO answer, reason and the buttons. Your choice go save for browser, so next time you open the page e go remember.
+
+> The translations still need review by people wey speak each language well well. If you see something wey no correct, abeg open issue or PR.
+
+#### **Light or Dark**
+
+The page go follow your phone or computer setting (light or dark) by default. If you want change am, tap **Theme** for bottom of page. Once you change am, the page go remember your choice.
 
 #### **Change Your Timezone**
 
@@ -47,16 +53,25 @@ For bottom of page you go see dropdown wey say "Timezone". Select your timezone 
 
 #### **Get New Reason**
 
-Press **Space** key or click somewhere for page to get another random reason. E fit show same thing again (na random ), so carry go.
+On computer, press **Space** key or click the "Press Space or Click Mouse" button. On phone, tap the button under the reason. You go get another random reason. E fit show same thing again (na random), so carry go.
 
-#### **Color Meaning**
+#### **YES or NO**
 
-- 🟢 **Green** = You fit deploy go ahead (e dey fine)
-- 🔴 **Red** = No be today o (wait make you breathe reach ten)
+The answer dey for side of the question, so you no need guess:
+- **YES** = You fit deploy, go ahead (the page go stay calm, white or dark)
+- **NO** = No be today o. The whole page go turn **red** (wait make you breathe reach ten)
 
 #### **Share Your Result**
 
-For bottom of page you get Share section with Facebook, Twitter, API and Slack links. Use am to share your decision or integrate am.
+Tap the round share button for bottom-right corner. For phone (and most computers) e go open your share menu so you fit send am to WhatsApp, Slack, X or anywhere. If your browser no get share menu, e go copy the link and show "Link don copy!". The link wey you share go carry your language and timezone.
+
+#### **For Developers**
+
+Tap **+ For developers** for bottom of page to see the GitHub source, the REST and Slack API links, and the Chrome and Edge extensions.
+
+#### **Keyboard and Screen Readers**
+
+Every button and dropdown fit work with keyboard (Tab to move, Enter or Space to press), and you go see clear outline for the one wey dey focused. Screen readers go hear the YES/NO answer and every new reason.
 
 ---
 
@@ -534,6 +549,13 @@ Display (show on screen + color)
 - **v2.2.0** — OG image now supports non-Latin scripts (Yoruba diacritics, Amharic Ethiopic)
 - **v2.2.0** — Birthday special reasons added for February 12–13
 - **v2.2.0** — API response includes `lng`, `tagline`, `color` fields
+- **v2.3.0** — Clear YES/NO answer for every language, and the red "no" page now pass contrast check
+- **v2.3.0** — Round share button for corner (phone share menu or copy link)
+- **v2.3.0** — Footer cleaned up: settings for one row, developer links under "For developers", languages show for their own name
+- **v2.3.0** — Keyboard focus outline, screen reader support, page language follow the selected language
+- **v2.3.0** — Theme follow your system setting; bigger buttons and text for phone; "Tap" hint for touch screens
+- **v2.3.0** — All six non-Pidgin translations rewritten from the Pidgin source; Amharic now use Ethiopic font
+- **v2.3.0** — Dev server no longer fixed to port 3001: `npm run dev` go pick free port
 
 ---
 

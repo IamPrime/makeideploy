@@ -14,7 +14,7 @@ body {
 :root {
   --bg: #ffffff;
   --text: #111111;
-  --muted: #1c093f;
+  --muted: #4a4a4a;
   --accent: #b4221b;
   --btn-border: #a3a3a3;
   --dark-modal-link: #FFD966;
@@ -24,7 +24,7 @@ body.dark {
   --bg: #0b0f17;
   --text: #e6eef8;
   --muted: #9aa6b2;
-  --accent: #b4221b;;
+  --accent: #b4221b;
   --btn-border: #9aa6b2;
 }
 
@@ -63,10 +63,23 @@ pre {
 }
 
 a:hover,
-a:active,
-a:focus {
-  outline: none;
-  color: #000;
+a:active {
+  color: var(--text);
+}
+
+/* Selected text in the page's own ink, so it reads on white, dark and red. */
+::selection {
+  background: var(--text);
+  color: var(--bg);
+}
+
+/* One focus ring for every control, drawn in the surrounding text colour
+   so it holds on white, the dark theme and the red "no" page alike.
+   :focus-visible keeps it off mouse clicks. */
+:focus-visible {
+  outline: 3px solid var(--text);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 #__next {
@@ -78,11 +91,9 @@ a:focus {
 
   display: grid;
   grid-template-rows: 1fr auto;
-  justify-content: center;
-}
-
-.aligner {
-  margin: 4rem;
+  /* One column capped at the viewport, so rows like .actions wrap instead
+     of stretching the page wider than the screen. */
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .item {
@@ -94,26 +105,65 @@ a:focus {
 .tagline {
   font: 300 2rem/2.5rem SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
-  margin-bottom: 1em;
   color: var(--muted);
   text-transform: uppercase;
   padding: 14px 0 13px 0;
 }
 
+/* The question and its answer sit on one line: "MAKE I DEPLOY TODAY? [NO]".
+   The word carries the verdict, so it never depends on colour alone. */
+.question {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem 1.6rem;
+  margin-bottom: 2.4rem;
+}
+
+.verdict {
+  font: 800 1.6rem/1 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.6rem 0.6rem;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+}
+
+/* Quiet yes: outlined in the page's text colour. */
+.verdict-yes {
+  color: var(--text);
+}
+
+/* Loud no: a solid white stamp with red lettering on the red page
+   (6.59:1 either way round). */
+.verdict-no {
+  color: var(--accent);
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+/* On phones the size tracks the viewport so whole words like "TOMORROW!"
+   fit on one line. Most of the seven languages have no browser hyphenation
+   dictionary, so word-break in .reason is only a last resort for genuinely
+   long words. */
 #text {
-  font: 900 6rem/6rem -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  font: 900 clamp(4rem, 13vw, 6rem)/1.05 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   color: var(--text);
   text-transform: uppercase;
   hyphens: auto;
 }
 
+/* Footer text at 13px: still clearly secondary to the hint, but readable on
+   a phone. The bottom padding clears the home indicator on notched phones. */
 .meta {
   align-self: flex-end;
-  padding: 1em 0;
+  padding: 1.2rem 0 max(1.2rem, env(safe-area-inset-bottom));
   text-align: center;
   width: 100%;
-  font: 300 1rem/1.25rem SFMono-Regular, Menlo, Monaco, Consolas,
+  font: 300 1.3rem/1.6 SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
 }
 
@@ -125,13 +175,107 @@ a:focus {
   background: transparent;
   text-decoration: none;
   color: var(--muted);
-  margin-top: 4rem;
-  outline: none;
+  padding: 0.4rem 0.8rem;
   cursor: pointer;
 }
 
+/* The Space hint sits alone under the reason. */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem 2.4rem;
+  margin-top: 4rem;
+  padding: 0 2rem;
+}
+
+/* Share: a quiet round button pinned to the bottom-right corner, clear of
+   the home indicator and rounded screen corners. Outline and icon use the
+   page's own ink, so it holds on white, dark and red without shouting. */
+.share-dock {
+  position: fixed;
+  right: max(1.6rem, env(safe-area-inset-right));
+  bottom: max(1.6rem, env(safe-area-inset-bottom));
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.share-fab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1.5px solid var(--muted);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
+  cursor: pointer;
+  transition: background-color 150ms ease-out, color 150ms ease-out;
+}
+
+/* Hover only where a pointer can hover, so a tap doesn't leave the button
+   stuck in its hover state. */
+@media (hover: hover) {
+  .share-fab:hover {
+    background: var(--text);
+    color: var(--bg);
+  }
+}
+
+/* "Link copied" bubble, to the left of the button. */
+.share-toast {
+  font: 500 1.3rem/1.2 SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  white-space: nowrap;
+  padding: 0.8rem 1.2rem;
+  border-radius: 6px;
+  background: var(--text);
+  color: var(--bg);
+  opacity: 0;
+  transform: translateX(0.4rem);
+  transition: opacity 150ms ease-out, transform 150ms ease-out;
+  pointer-events: none;
+}
+
+.share-toast.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .share-fab,
+  .share-toast {
+    transition: none;
+  }
+}
+
+/* On narrow screens the footer spans the full width, so leave a band
+   below it for the button instead of letting the two overlap. */
+@media screen and (max-width: 640px) {
+  .meta {
+    padding-bottom: calc(48px + max(1.6rem, env(safe-area-inset-bottom)) + 0.8rem);
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .space-btn {
-  width: 15rem;
   padding: 0.25em 1em;
   border: 1px solid var(--btn-border);
   border-radius: 4px;
@@ -150,26 +294,46 @@ a:focus {
   color: var(--text);
 }
 
+/* The theme control reads as a link-like word ("Light"/"Dark") matching the
+   footer's other actions. */
 .theme-btn {
   border: 0;
   background: transparent;
-  font-size: 1.2rem;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
   cursor: pointer;
   color: var(--text);
   padding: 0;
   margin: 0;
-  line-height: 1;
 }
 
-.theme-btn:focus,
-.footer-list select:focus,
-.space-btn:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px var(--focus-ring);
+/* Developer links sit behind a native disclosure under the settings row. */
+.footer-dev {
+  margin-bottom: 1.5rem;
 }
 
-.theme-pill {
-  color: var(--text);
+.footer-dev summary {
+  display: inline-block;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+}
+
+.footer-dev summary::before {
+  content: '+ ';
+}
+
+.footer-dev[open] summary::before {
+  content: '\2212 ';
+}
+
+.footer-dev summary::-webkit-details-marker {
+  display: none;
+}
+
+.footer-dev ul.footer-list {
+  margin: 0.8rem 0 0;
 }
 
 ul.footer-list {
@@ -222,11 +386,6 @@ ul.footer-list .link-as-button {
   cursor: pointer;
 }
 
-ul.footer-list .link-as-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px var(--focus-ring);
-}
-
 /* ensure the button matches anchor text sizing and flow */
 ul.footer-list .link-as-button {
   font: inherit;
@@ -240,6 +399,11 @@ ul.footer-list .link-as-button {
 
 ul.footer-list select {
   max-width: 110px;
+}
+
+/* Language names are short and must stay whole. */
+ul.footer-list select.language-select {
+  max-width: none;
 }
 
 .modal-text {
@@ -257,6 +421,9 @@ ul.footer-list select {
     font: 300 3rem/2.8rem SFMono-Regular, Menlo, Monaco, Consolas,
       'Liberation Mono', 'Courier New', monospace;
   }
+  .verdict {
+    font-size: 2rem;
+  }
   #text {
     font: 900 9rem/8.5rem -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
       Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
@@ -268,79 +435,112 @@ ul.footer-list select {
     font-size: 1.5rem;
   }
   #reload {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
   }
   ul.footer-list select {
-    max-width: 70px;
+    max-width: 160px;
   }
 }
 
+/* Phones held sideways are wide enough for the desktop type but only
+   ~390px tall. Size the answer by height so the question, reason, Share and
+   footer all fit without scrolling. */
+@media (orientation: landscape) and (max-height: 500px) {
+  .tagline {
+    font-size: 2rem;
+    line-height: 2.4rem;
+    padding: 0;
+  }
+  .question {
+    margin-bottom: 1.2rem;
+  }
+  #text {
+    font-size: clamp(3.2rem, 11vh, 5.6rem);
+    line-height: 1.05;
+  }
+  .actions {
+    margin-top: 1.6rem;
+  }
+  .meta {
+    padding-top: 0.6rem;
+  }
+}
+
+/* The hint names the input the visitor actually has: keys and a mouse, or
+   a finger. The hidden variant is also hidden from screen readers. */
+.hint-touch {
+  display: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .hint-pointer {
+    display: none;
+  }
+  .hint-touch {
+    display: inline;
+  }
+}
+
+/* Touch screens (phones, tablets, touch laptops) get 44px targets on every
+   control, whatever the viewport width. Mouse users keep the compact row. */
+@media (pointer: coarse) {
+  #reload,
+  .theme-btn,
+  .footer-dev summary,
+  ul.footer-list a,
+  ul.footer-list .link-as-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+  }
+  ul.footer-list select {
+    min-height: 44px;
+    /* 16px stops iOS zooming the page when a select opens. */
+    font-size: 16px;
+  }
+  ul.footer-list {
+    row-gap: 0.4rem;
+  }
+}
+
+/* On narrow screens rows wrap, so per-item separators would dangle at line
+   ends. Drop them and let spacing separate the groups instead. */
+@media screen and (max-width: 640px) {
+  ul.footer-list {
+    column-gap: 1.25rem;
+    row-gap: 0.75rem;
+    padding: 0 1rem;
+  }
+  ul.footer-list li:not(:last-child)::after {
+    content: none;
+  }
+}
+
+/* The "no" state. The red page remaps the colour roles instead of
+   overriding each element: white ink, red-tinted secondary text and
+   borders, all measured against #b4221b (text 6.59:1, secondary 4.95:1,
+   borders 3.85:1). */
 .its-friday {
+  --bg: var(--accent);
+  --text: #ffffff;
+  --muted: #ffd6d0;
+  --btn-border: #ffb3a8;
   background-color: var(--accent);
-  --text: #1a1a1a;
+  color: var(--text);
 }
 
-.its-friday .tagline {
-  color: #1a1a1a;
-  text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.2);
-  -webkit-font-smoothing: antialiased;
+/* The Chrome modal lives inside the wrapper; keep it on the page theme,
+   not the red. */
+.its-friday .modal-overlay {
+  --bg: #ffffff;
+  --text: #111111;
 }
 
-.its-friday #reload {
-  color: #1a1a1a;
-  text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.2);
-  -webkit-font-smoothing: antialiased;
-}
-
-.its-friday .footer-list li {
-  color: #1a1a1a;
-  text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.2);
-  -webkit-font-smoothing: antialiased;
-}
-
-.its-friday .footer-label {
-  color: rgba(26, 26, 26, 0.85);
-  text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.2);
-  -webkit-font-smoothing: antialiased;
-}
-
-.its-friday .footer-list a {
-  color: #1a1a1a;
-  font-weight: 600;
-  text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.2);
-}
-
-.its-friday .space-btn {
-  border-color: #1a1a1a;
-  color: #1a1a1a;
-  text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.1);
-  -webkit-font-smoothing: antialiased;
-}
-
-.its-friday .footer-list span {
-  border-color: #1a1a1a;
-  color: #1a1a1a;
-  text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.1);
-  -webkit-font-smoothing: antialiased;
-}
-
-.its-friday .footer-list select {
-  background: rgba(255, 255, 255, 0.2);
-  color: #1a1a1a;
-  border-color: #1a1a1a;
-  -webkit-font-smoothing: antialiased;
-}
-
-.its-friday .footer-list select option {
-  background: var(--accent);
-  color: #1a1a1a;
-  -webkit-font-smoothing: antialiased;
-}
-
-.its-friday .footer-list label {
-  color: #1a1a1a;
-  text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.1);
-  -webkit-font-smoothing: antialiased;
+body.dark .its-friday .modal-overlay {
+  --bg: #0b0f17;
+  --text: #e6eef8;
 }
 
 /* Modal styling to respect dark/light themes */
@@ -410,4 +610,32 @@ body.dark .modal-overlay a:focus {
   .reason {
     padding: 0 2rem;
   }
+}
+
+/* Script-aware type. <html lang> follows the active language (see _app).
+   Ge'ez has no monospace tradition and no case, so Amharic swaps the mono
+   and tracked roles to an Ethiopic sans, using faces already on the device:
+   Noto Sans Ethiopic (Android, most Linux), Nyala/Ebrima (Windows),
+   Kefa (Apple). Nothing is downloaded. */
+:lang(am) .tagline,
+:lang(am) .verdict,
+:lang(am) #text,
+:lang(am) #reload,
+:lang(am) .meta,
+:lang(am) .share-toast {
+  font-family: 'Noto Sans Ethiopic', 'Abyssinica SIL', Ebrima, Nyala, Kefa,
+    -apple-system, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: 0;
+}
+
+/* Ethiopic syllables sit taller than Latin caps. */
+:lang(am) #text {
+  line-height: 1.2;
+}
+
+/* Yoruba and Igbo stack tone marks over dotted capitals (Ẹ́, Ọ̀, Ị́), which
+   collide between lines at the Latin display leading. */
+:lang(yo) #text,
+:lang(ig) #text {
+  line-height: 1.2;
 }

@@ -17,7 +17,8 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   const time = Time.validOrNull(timezone)
   const reasons = getLocalizedReasons(lng)
   const messages = getMessages(lng)
-  const thumb_url = `${getBaseUrl()}/api/og?lng=${lng}`
+  const base = getBaseUrl(req)
+  const thumb_url = `${base}/api/og?lng=${lng}`
 
   res.status(200).json({
     response_type: time ? 'in_channel' : 'ephemeral',
@@ -28,7 +29,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
           : `Invalid time zone: '${timezone}'`,
         color: makeIDeployColorTheme(time),
         thumb_url,
-        footer_icon: makeIDeployFavIcon(time),
+        footer_icon: makeIDeployFavIcon(time, base),
         footer: messages['tagline'] + (time ? ` | ${timezone}` : '')
       }
     ]
