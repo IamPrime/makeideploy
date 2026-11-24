@@ -12,18 +12,18 @@ Dis na Pidgin English version of "shouldideploy" repo. We dey try make developer
 
 <table>
   <tr>
-    <td width="68%"><img src="docs/screenshots/makeideploy-desktop.png" alt="makeideploy.today on desktop: 'Make I Deploy Today?' with the answer 'SHIP AM!'"></td>
-    <td width="32%" rowspan="2"><img src="docs/screenshots/makeideploy-mobile.png" alt="makeideploy.today on a phone, with the footer stacked neatly"></td>
+    <td width="68%"><img src="docs/screenshots/makeideploy-desktop.png" alt="makeideploy.today on desktop: 'Make I Deploy Today?' answered YES, with the reason 'GBOSA! DO AM'"></td>
+    <td width="32%" rowspan="2"><img src="docs/screenshots/makeideploy-mobile.png" alt="makeideploy.today on a phone in dark mode: YES, 'SHIP AM!', with the round share button in the corner"></td>
   </tr>
   <tr>
-    <td><img src="docs/screenshots/makeideploy-dark.png" alt="Dark mode: 'FOLLOW FLOW'"></td>
+    <td><img src="docs/screenshots/makeideploy-no.png" alt="A 'no' day: the page turns red and the answer reads NO, 'MBA'"></td>
   </tr>
   <tr>
-    <td colspan="2"><img src="docs/screenshots/makeideploy-language.png" alt="The site in Yoruba, one of seven languages"></td>
+    <td colspan="2"><img src="docs/screenshots/makeideploy-language.png" alt="The site in Yoruba: 'Ṣé Kí N Gbé E Jáde Lónìí?' answered BẸ́Ẹ̀NI"></td>
   </tr>
 </table>
 
-Light or dark, phone or laptop, and e dey speak seven languages: Pidgin, Swahili, Yoruba, Igbo, Hausa, Zulu and Amharic. 🎬 [Watch the short demo](docs/screenshots/makeideploy-demo.mp4), or go try am live for [makeideploy.today].
+E go answer you straight, YES or NO, then give you reason wey go make you laugh. When e be NO, the whole page go turn red. Light or dark (e go follow your phone setting), phone or laptop, and e dey speak seven languages: Pidgin, Swahili, Yoruba, Igbo, Hausa, Zulu and Amharic. Press the round button for corner to share your answer with your people. Go try am live for [makeideploy.today].
 
 ### How We Dey Roll 💻
 
@@ -50,7 +50,7 @@ Light or dark, phone or laptop, and e dey speak seven languages: Pidgin, Swahili
 
 - Run dis tin:
   - `npm i` — make dependencies enter.
-  - `npm run dev` start dev server
+  - `npm run dev` start dev server. E go use port 3000, and if another app don hold am, Next go find the next free port (look the terminal for the URL). You fit choose your own: `PORT=4000 npm run dev` (PowerShell: `$env:PORT=4000; npm run dev`).
   - `now dev` if you want use local serveless function (you go need "now")
 
   ## Vercel Analytics (Next.js) — Quick setup

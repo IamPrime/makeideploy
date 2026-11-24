@@ -27,6 +27,16 @@ Make I Deploy Today? does **not** collect, store, or transmit:
 - ✓ Cookies or tracking data
 - ✓ Device identifiers
 
+### Stored On Your Device
+
+The website remembers two preferences in your browser's local storage so they persist between visits:
+- `locale` - the language you picked
+- `theme` - light or dark, only once you change it yourself
+
+These never leave your device and are not sent to our servers. You can clear them by clearing your browser's site data.
+
+The **Share** button uses your device's own share menu, or copies a link to your clipboard. Nothing about what you share, or where, is sent to us.
+
 ## How Your Data Is Used
 
 The parameters you send to the API are used solely to:

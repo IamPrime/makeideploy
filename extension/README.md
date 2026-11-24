@@ -25,7 +25,7 @@ A quick-access Chrome extension for the [Make I Deploy Today?](https://makeidepl
 Once published to the Chrome Web Store, users can install directly from:
 `https://chromewebstore.google.com/detail/make-i-deploy-today/YOUR_EXTENSION_ID`
 
-The install link will appear on the [main website](https://www.makeideploy.today) in the footer.
+The install link will appear on the [main website](https://www.makeideploy.today) under **For developers** at the bottom of the page.
 
 ## Project Structure
 
