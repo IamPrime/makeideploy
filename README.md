@@ -12,18 +12,18 @@ Dis na Pidgin English version of "shouldideploy" repo. We dey try make developer
 
 <table>
   <tr>
-    <td width="68%"><img src="docs/screenshots/makeideploy-desktop.png" alt="makeideploy.today on desktop: 'Make I Deploy Today?' answered YES, with the reason 'GBOSA! DO AM'"></td>
-    <td width="32%" rowspan="2"><img src="docs/screenshots/makeideploy-mobile.png" alt="makeideploy.today on a phone in dark mode: YES, 'SHIP AM!', with the round share button in the corner"></td>
+    <td width="68%"><img src="docs/screenshots/makeideploy-desktop.png" alt="makeideploy.today on desktop: the page is green and 'Make I Deploy Today?' is answered YES, with the reason 'DO AM WELL WELL' for Lagos"></td>
+    <td width="32%" rowspan="2"><img src="docs/screenshots/makeideploy-mobile.png" alt="makeideploy.today on a phone in dark mode: a deep green YES day, 'NO FEAR!', with the round share button in the corner"></td>
   </tr>
   <tr>
-    <td><img src="docs/screenshots/makeideploy-no.png" alt="A 'no' day: the page turns red and the answer reads NO, 'MBA'"></td>
+    <td><img src="docs/screenshots/makeideploy-no.png" alt="A public holiday: New York on Thanksgiving, the page is red and the answer reads ✕ THANKSGIVING DAY, 'HOLIDAY MODE: ON. DEPLOY: OFF'"></td>
   </tr>
   <tr>
-    <td colspan="2"><img src="docs/screenshots/makeideploy-language.png" alt="The site in Yoruba: 'Ṣé Kí N Gbé E Jáde Lónìí?' answered BẸ́Ẹ̀NI"></td>
+    <td colspan="2"><img src="docs/screenshots/makeideploy-language.png" alt="The site in Yoruba: 'Ṣé Kí N Gbé E Jáde Lónìí?' answered BẸ́Ẹ̀NI, 'JẸ́ KÁ ṢE É!'"></td>
   </tr>
 </table>
 
-E go answer you straight, YES or NO, then give you reason wey go make you laugh. When e be NO, the whole page go turn red. Light or dark (e go follow your phone setting), phone or laptop, and e dey speak seven languages: Pidgin, Swahili, Yoruba, Igbo, Hausa, Zulu and Amharic. Press the round button for corner to share your answer with your people. Go try am live for [makeideploy.today].
+E go answer you straight, YES or NO, then give you reason wey go make you laugh. YES turn the whole page green, NO turn am red. For public holiday (Thanksgiving, Eid, Independence Day...) the holiday name go show instead, and the weekend follow your timezone country. Light or dark (e go follow your phone setting), phone or laptop, and e dey speak seven languages: Pidgin, Swahili, Yoruba, Igbo, Hausa, Zulu and Amharic. Press the round button for corner to share your answer with your people. 🎬 [Watch the short demo](docs/screenshots/makeideploy-demo.mp4), or go try am live for [makeideploy.today].
 
 ### How We Dey Roll 💻
 
