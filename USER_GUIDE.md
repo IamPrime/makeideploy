@@ -35,7 +35,7 @@ For bottom of page you go see **Language** selector. Each language dey show for 
 - **isiZulu** — Zulu
 - **አማርኛ** — Amharic
 
-The whole page go change: question, YES/NO answer, reason and the buttons. Your choice go save for browser, so next time you open the page e go remember.
+The whole page go change: question, YES/NO answer, reason and the buttons. Your choice go save for browser, so next time you open the page e go remember. If you never pick, na Naijá e go show, wherever you dey.
 
 > The translations still need review by people wey speak each language well well. If you see something wey no correct, abeg open issue or PR.
 
@@ -58,8 +58,10 @@ On computer, press **Space** key or click the "Press Space or Click Mouse" butto
 #### **YES or NO**
 
 The answer dey for side of the question, so you no need guess:
-- **YES** = You fit deploy, go ahead (the page go stay calm, white or dark)
+- **YES** = You fit deploy, go ahead. The whole page go turn **green**
 - **NO** = No be today o. The whole page go turn **red** (wait make you breathe reach ten)
+
+For holiday (Thanksgiving, Christmas, Eid, Independence Day...), the holiday name go show instead of YES or NO, with small **✓** (you fit deploy) or **✕** (no be today) for front, so you no need follow colour alone. Public holiday wey everybody dey house na always **✕** and red. Observance like Valentine's Day no be day off, so e go just show the name, and the line under the reason go talk "Observance".
 
 #### **Share Your Result**
 
@@ -71,7 +73,7 @@ Tap **+ For developers** for bottom of page to see the GitHub source, the REST a
 
 #### **Keyboard and Screen Readers**
 
-Every button and dropdown fit work with keyboard (Tab to move, Enter or Space to press), and you go see clear outline for the one wey dey focused. Screen readers go hear the YES/NO answer and every new reason.
+Every button and dropdown fit work with keyboard (Tab to move, Enter or Space to press), and you go see clear outline for the one wey dey focused. Screen readers go hear the YES/NO answer (even for holiday, before the name) and every new reason. The page get proper main and footer areas, so screen reader fit jump between the answer and the settings.
 
 ---
 
@@ -79,8 +81,8 @@ Every button and dropdown fit work with keyboard (Tab to move, Enter or Space to
 
 E go tell you "Yes, deploy na" if:
 - ✔️ Na Monday to Thursday (not Friday o)
-- ✔️ No be Saturday or Sunday
-- ✔️ No be Christmas, New Year, or any holiday
+- ✔️ No be weekend (Saturday or Sunday for most places; for Saudi Arabia, Egypt and others na Friday–Saturday, for Afghanistan and Iran na Thursday–Friday)
+- ✔️ No be Christmas, New Year, or public holiday for your timezone country (Nigeria, Kenya, Tanzania, South Africa, Ethiopia, US, UK)
 - ✔️ Time no pass 4PM (16:00)
 - ✔️ No be 22nd of any month (especially Friday 22nd wey be cursed 🧿)
 - ✔️ No be my birthday eve or birthday (February 13th wey be special day)
@@ -90,7 +92,8 @@ E go tell you "Yes, deploy na" if:
 
 E go give you "No be today" reason if ANY of these happen:
 - Na **Friday** (always Friday get wahala)
-- Na **weekend** (Saturday or Sunday)
+- Na **weekend** (Saturday or Sunday, or the local weekend: the page go show am like "Weekend na Fri–Sat")
+- Na the **last work day before weekend** where weekend no be Saturday–Sunday (Thursday for Riyadh, Wednesday for Kabul)
 - Na **holiday** or holiday eve day
 - Time don pass **4PM** (afternoon danger zone dey there)
 - Na **Thursday late afternoon** (time run close to Friday)
@@ -553,6 +556,11 @@ Display (show on screen + color)
 - **v2.3.0** — Round share button for corner (phone share menu or copy link)
 - **v2.3.0** — Footer cleaned up: settings for one row, developer links under "For developers", languages show for their own name
 - **v2.3.0** — Keyboard focus outline, screen reader support, page language follow the selected language
+- **v2.4.0** — Whole page turn green for YES, red for NO
+- **v2.4.0** — Public holidays for Nigeria, Kenya, Tanzania, South Africa, Ethiopia, US and UK: the holiday name show for the answer, with ✓ or ✕
+- **v2.4.0** — Local weekends (Friday–Saturday, Thursday–Friday and others) follow the timezone
+- **v2.4.0** — Naijá na always the default language; your pick save as `lng` cookie so the page arrive for your language
+- **v2.4.0** — Chrome install guide and timezone picker translated and grouped by region; page get main and footer landmarks
 - **v2.3.0** — Theme follow your system setting; bigger buttons and text for phone; "Tap" hint for touch screens
 - **v2.3.0** — All six non-Pidgin translations rewritten from the Pidgin source; Amharic now use Ethiopic font
 - **v2.3.0** — Dev server no longer fixed to port 3001: `npm run dev` go pick free port

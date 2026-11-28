@@ -24,16 +24,18 @@ Make I Deploy Today? does **not** collect, store, or transmit:
 - ✓ Location data
 - ✓ Authentication credentials
 - ✓ Health or financial information
-- ✓ Cookies or tracking data
+- ✓ Tracking or advertising cookies
 - ✓ Device identifiers
 
 ### Stored On Your Device
 
-The website remembers two preferences in your browser's local storage so they persist between visits:
-- `locale` - the language you picked
-- `theme` - light or dark, only once you change it yourself
+The website remembers two preferences so they persist between visits:
+- `lng` cookie - the language you picked, only once you pick one. It is sent with your page requests so the page arrives in your language, and is used for nothing else. Without it the page is in Nigerian Pidgin.
+- `theme` in local storage - light or dark, only once you change it yourself. It never leaves your device.
 
-These never leave your device and are not sent to our servers. You can clear them by clearing your browser's site data.
+Neither identifies you or tracks you. You can clear them by clearing your browser's site data.
+
+Public holidays and weekends are worked out from the timezone you select; no location data is used.
 
 The **Share** button uses your device's own share menu, or copies a link to your clipboard. Nothing about what you share, or where, is sent to us.
 

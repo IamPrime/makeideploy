@@ -168,6 +168,22 @@ Get the API response in Swahili:
 https://makeideploy.today/api?tz=Africa/Nairobi&lng=sw
 ```
 
+Check one public holiday (Kenya's Jamhuri Day, named in Swahili):
+
+```url
+https://makeideploy.today/api?tz=Africa/Nairobi&date=2026-12-12&lng=sw
+```
+
+### Holidays
+
+When the timezone belong to Nigeria, Kenya, Tanzania, South Africa, Ethiopia, the US or the UK, the site and API dey check that country public holidays (Thanksgiving, Labour Day, Eid, Independence Day and the rest). If na day off, the answer na **no** and the page turn red, with the holiday name instead of YES/NO and a small ✕ (or ✓ for yes) so the answer no depend on colour alone. Observances like Valentine's Day just show their name. `UTC` and other timezones only get the worldwide days (Christmas, New Year).
+
+Holiday names come for the country own language when e dey (Swahili for Kenya, Amharic for Ethiopia); otherwise na the official English name.
+
+### Weekends
+
+No be everywhere weekend na Saturday and Sunday. For countries wey rest Friday–Saturday (Saudi Arabia, Egypt, Israel, Bangladesh, Algeria and others), Thursday–Friday (Afghanistan, Iran), only Friday (Djibouti), only Saturday (Nepal) or Friday and Sunday (Brunei), the answer follow the local weekend: Sunday fit be work day, and the "no deploy before weekend" day move to the last work day (Thursday for Riyadh). The page show the local weekend under the answer, like `Weekend na Fri–Sat`. The list dey for `helpers/weekends.ts`.
+
 ## API Response
 
 The API go give you JSON object wey get these keys:
@@ -177,6 +193,7 @@ The API go give you JSON object wey get these keys:
 - `lng`: Language/locale wey dey active.
 - `tagline`: App tagline for that locale.
 - `makeideploy`: Boolean value wey go show if you suppose deploy today.
+- `holiday`: Today holiday for the timezone country, as `{ "name", "dayOff", "country" }`, or `null`. `dayOff: true` means public holiday (so `makeideploy` na `false`).
 - `color`: Hex color wey match current deploy status.
 - `message`: String/Message wey explain why you go or no go deploy.
 
@@ -189,7 +206,8 @@ Example response:
   "lng": "pcm",
   "tagline": "Make I Deploy Today?",
   "makeideploy": false,
-  "color": "#ff4136",
+  "holiday": null,
+  "color": "#b4221b",
   "message": "Today na Monday, you suppose don deploy!"
 }
 ```
@@ -197,6 +215,8 @@ Example response:
 ## Credits
 
 Favicon created by **emilegraphics** from the NOUN Project at [favicon-credit]
+
+Public holiday data from [date-holidays](https://github.com/commenthol/date-holidays) © its contributors, licensed [CC-BY-SA-4.0](https://creativecommons.org/licenses/by-sa/4.0/). The subset for our countries dey for `helpers/holidays-data.json`; regenerate am with `node scripts/build-holidays.mjs`.
 
 ## 🔐 Privacy Policy
 

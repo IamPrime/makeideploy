@@ -1,3 +1,5 @@
+import { weekendFor, lastWorkdayOf } from './weekends'
+
 export default class Time {
   static DEFAULT_TIMEZONE = 'UTC'
   timezone: string
@@ -130,12 +132,29 @@ export default class Time {
   }
 
   /**
-   * We dey weekend (Saturday or Sunday)?
+   * This timezone's weekend days (0 Sunday … 6 Saturday). Saturday–Sunday
+   * for most of the world; see helpers/weekends for the rest.
+   */
+  weekend(): number[] {
+    return weekendFor(this.timezone)
+  }
+
+  /**
+   * We dey weekend? Saturday or Sunday in most places, the local weekend
+   * elsewhere (Friday–Saturday in Riyadh or Cairo, ...).
    * @return boolean
    */
   naWeekend(): boolean {
-    const day = this.getDate().getDay()
-    return day === 6 || day === 0
+    return this.weekend().includes(this.getDate().getDay())
+  }
+
+  /**
+   * Today na the last work day before the weekend? Friday in most places,
+   * Thursday where the weekend is Friday–Saturday.
+   * @return boolean
+   */
+  naLastWorkday(): boolean {
+    return this.getDate().getDay() === lastWorkdayOf(this.weekend())
   }
 
   /**

@@ -100,7 +100,7 @@ async function fetchDeploymentDecision() {
     const timezoneSelect = document.getElementById('timezone');
     const languageSelect = document.getElementById('language');
     const timezone = timezoneSelect.value || 'UTC';
-    const language = languageSelect.value || 'en';
+    const language = languageSelect.value || 'pcm';
 
     console.log('Fetching decision with:', { timezone, language });
     contentDiv.innerHTML = '<div class="loading">Checking the vibes...</div>';

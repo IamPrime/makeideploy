@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import Time from '../../helpers/time'
 import { getRandom, dayHelper, makeIDeploy, makeIDeployColorTheme } from '../../helpers/constants'
 import { getLocalizedReasons, getMessages, SUPPORTED_LOCALES } from '../../helpers/locale'
+import { holidayFor } from '../../helpers/holidays'
 
 type ApiResponse = {
   error?: { message: string; type: string; code: number }
@@ -10,6 +11,8 @@ type ApiResponse = {
   lng?: string
   tagline?: string
   makeideploy?: boolean | null
+  // Today's holiday in the timezone's country (null when none, or for UTC).
+  holiday?: { name: string; dayOff: boolean; country: string } | null
   color?: string
   message?: string
 }
@@ -52,15 +55,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<ApiResponse>) =
     : new Time(timezone)
   const reasons = getLocalizedReasons(lng)
   const messages = getMessages(lng)
+  const holiday = holidayFor(time, lng)
 
   res.status(200).json({
     timezone,
     date: (date ?? time.getDate()).toISOString(),
     lng,
     tagline: messages['tagline'],
-    makeideploy: makeIDeploy(time),
-    color: makeIDeployColorTheme(time),
-    message: getRandom(dayHelper(time, reasons))
+    makeideploy: makeIDeploy(time, undefined, holiday),
+    holiday,
+    color: makeIDeployColorTheme(time, holiday),
+    message: getRandom(dayHelper(time, reasons, holiday))
   })
 }
 

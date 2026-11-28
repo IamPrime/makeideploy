@@ -63,11 +63,14 @@ const Footer = (props: IFooter) => {
       {/* Page settings: what changes the answer or how it reads. */}
       <ul className="footer-list footer-settings" suppressHydrationWarning>
         <li>
-          <span className="footer-label">{t('timezone_label')}:</span>{' '}
+          <label className="footer-label" htmlFor="timezone-select">
+            {t('timezone_label')}:
+          </label>{' '}
           <Timezone
             onChange={props.changeTimezone}
             timezone={props.timezone}
             label={t('timezone_label')}
+            otherLabel={t('tz_other')}
           />
         </li>
         <li suppressHydrationWarning>
@@ -76,7 +79,12 @@ const Footer = (props: IFooter) => {
             type="button"
             className="theme-btn"
             onClick={toggleTheme}
-            aria-pressed={isMounted ? theme === 'dark' : false}
+            // The word on the button is the current theme, so the name says
+            // "Theme: Dark" rather than also toggling aria-pressed (which
+            // read as "Dark, pressed"). The title says what a press does.
+            aria-label={`${t('dark_label')}: ${
+              isMounted && theme === 'dark' ? t('dark') : t('light')
+            }`}
             title={t('toggle_theme')}
           >
             {isMounted ? (theme === 'dark' ? t('dark') : t('light')) : t('light')}
@@ -130,7 +138,6 @@ const Footer = (props: IFooter) => {
               type="button"
               className="link-as-button"
               onClick={() => setShowChromeModal(true)}
-              title="Install Chrome Extension"
             >
               Chrome
             </button>
@@ -139,7 +146,6 @@ const Footer = (props: IFooter) => {
               href="https://microsoftedge.microsoft.com/addons/detail/fbblnmmdgndkkgbkhmpjnjandodbgigp"
               target="_blank"
               rel="noopener noreferrer"
-              title="Install Edge Extension"
             >
               Edge
             </a>

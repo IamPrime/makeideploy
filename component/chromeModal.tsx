@@ -1,4 +1,5 @@
 import React from 'react'
+import { I18nContext } from '../pages/_app'
 
 interface ChromeModalProps {
   onClose: () => void
@@ -7,7 +8,19 @@ interface ChromeModalProps {
 const FOCUSABLE =
   'a[href], button:not([disabled]), select, input, textarea, [tabindex]:not([tabindex="-1"])'
 
+const REPO_URL = 'https://github.com/IamPrime/makeideploy'
+const GUIDE_URL = `${REPO_URL}/blob/master/CHROME_INSTALL.md`
+
+// Drops React nodes into a translated sentence at its {placeholders}, so each
+// language keeps its own word order around the link or Chrome label.
+const fill = (text: string, parts: Record<string, React.ReactNode>) =>
+  text.split(/(\{\w+\})/).map((chunk, i) => {
+    const key = chunk.match(/^\{(\w+)\}$/)?.[1]
+    return <React.Fragment key={i}>{key && key in parts ? parts[key] : chunk}</React.Fragment>
+  })
+
 const ChromeModal: React.FC<ChromeModalProps> = ({ onClose }) => {
+  const { t } = React.useContext(I18nContext)
   const dialogRef = React.useRef<HTMLDivElement>(null)
   const closeRef = React.useRef<HTMLButtonElement>(null)
 
@@ -48,84 +61,74 @@ const ChromeModal: React.FC<ChromeModalProps> = ({ onClose }) => {
     }
   }, [onClose])
 
+  const external = { target: '_blank', rel: 'noopener noreferrer' }
+
   return (
-    <div
-      className="modal-overlay"
-      style={{
-        position: 'fixed',
-        inset: 0,
-        background: 'rgba(0,0,0,0.5)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 1000,
-      }}
-      onClick={onClose}
-    >
+    <div className="modal-overlay" onClick={onClose}>
       <div
         ref={dialogRef}
+        className="modal"
         role="dialog"
         aria-modal="true"
         aria-labelledby="chrome-modal-title"
-        style={{
-          background: 'var(--bg)',
-          maxWidth: '720px',
-          width: '90%',
-          maxHeight: '90vh',
-          overflowY: 'auto',
-          padding: '1.25rem',
-          borderRadius: '8px',
-        }}
         onClick={(e) => e.stopPropagation()}
       >
-        <button
-          ref={closeRef}
-          type="button"
-          aria-label="Close"
-          onClick={onClose}
-          style={{
-            float: 'right',
-            border: 'none',
-            background: 'transparent',
-            fontSize: '3rem',
-            cursor: 'pointer',
-          }}
-        >
-          ×
-        </button>
-        <h3 id="chrome-modal-title">Install manually from GitHub</h3>
-        <hr />
-        <p className="modal-text">The Chrome Web Store submission is currently unavailable.</p>
+        <div className="modal-head">
+          <h2 id="chrome-modal-title" className="modal-title">
+            {t('chrome_title')}
+          </h2>
+          <button
+            ref={closeRef}
+            type="button"
+            className="modal-close"
+            aria-label={t('close')}
+            onClick={onClose}
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+              <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
 
-        <ol className='modal-text'>
+        <p className="modal-lead">{t('chrome_unavailable')}</p>
+
+        {/* Chrome's own labels stay in English: they're what the visitor
+            looks for on the chrome://extensions page. */}
+        <ol className="modal-steps">
+          {/* One <span> per step: the <li> is a two-column grid (number,
+              text), and loose inline pieces would each take a cell. */}
           <li>
-            Download or clone the repository:{' '}
-            <a
-              href="https://github.com/IamPrime/makeideploy"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              github.com/IamPrime/makeideploy
-            </a>
+            <span>
+              {fill(t('chrome_step_1'), {
+                link: (
+                  <a href={REPO_URL} {...external}>
+                    github.com/IamPrime/makeideploy
+                  </a>
+                )
+              })}
+            </span>
           </li>
-          <li className='modal-text'>
-            Extract the folder (if zipped) and open <span className='highlight'>chrome://extensions</span> in Chrome.
+          <li>
+            <span>{fill(t('chrome_step_2'), { url: <code>chrome://extensions</code> })}</span>
           </li>
-          <li className='modal-text'>
-            Enable <strong>Developer mode</strong>, click <strong>Load unpacked</strong>, and select the extracted folder.
+          <li>
+            <span>
+              {fill(t('chrome_step_3'), {
+                devmode: <strong>Developer mode</strong>,
+                unpacked: <strong>Load unpacked</strong>
+              })}
+            </span>
           </li>
         </ol>
 
-        <p className="modal-text">
-          For a guided walkthrough and a downloadable ZIP, see the chrome install guide:{' '}
-          <a
-            href="https://github.com/IamPrime/makeideploy/blob/main/CHROME_INSTALL.md"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            CHROME_INSTALL.md
-          </a>
-          .
+        <p className="modal-foot">
+          {fill(t('chrome_guide'), {
+            guide: (
+              <a href={GUIDE_URL} {...external}>
+                {t('chrome_guide_link')}
+              </a>
+            )
+          })}
         </p>
       </div>
     </div>

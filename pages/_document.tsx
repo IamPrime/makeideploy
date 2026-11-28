@@ -1,10 +1,13 @@
 import React from 'react'
-import { Html, Head, Main, NextScript } from 'next/document'
+import { Html, Head, Main, NextScript, DocumentProps } from 'next/document'
 import HeadElements from '../component/head'
 
-export default function Document() {
+export default function Document(props: DocumentProps) {
+  // The page resolved the language on the server (see helpers/locale), so
+  // <html lang> is right before any script runs.
+  const lang = props.__NEXT_DATA__.props?.pageProps?.locale || 'pcm'
   return (
-    <Html lang="pcm">
+    <Html lang={lang}>
       <Head>
         <HeadElements />
       </Head>

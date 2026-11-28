@@ -8,6 +8,7 @@ import {
 } from '../../../helpers/constants'
 import Time from '../../../helpers/time'
 import { getLocalizedReasons, getMessages, SUPPORTED_LOCALES } from '../../../helpers/locale'
+import { holidayFor } from '../../../helpers/holidays'
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
   const timezone = req.body?.text || req.query.tz || Time.DEFAULT_TIMEZONE
@@ -17,6 +18,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   const time = Time.validOrNull(timezone)
   const reasons = getLocalizedReasons(lng)
   const messages = getMessages(lng)
+  const holiday = holidayFor(time, lng)
   const base = getBaseUrl(req)
   const thumb_url = `${base}/api/og?lng=${lng}`
 
@@ -25,12 +27,15 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
     attachments: [
       {
         text: time
-          ? getRandom(dayHelper(time, reasons))
+          ? getRandom(dayHelper(time, reasons, holiday))
           : `Invalid time zone: '${timezone}'`,
-        color: makeIDeployColorTheme(time),
+        color: makeIDeployColorTheme(time, holiday),
         thumb_url,
-        footer_icon: makeIDeployFavIcon(time, base),
-        footer: messages['tagline'] + (time ? ` | ${timezone}` : '')
+        footer_icon: makeIDeployFavIcon(time, base, holiday),
+        footer:
+          messages['tagline'] +
+          (time ? ` | ${timezone}` : '') +
+          (holiday ? ` | ${holiday.name}` : '')
       }
     ]
   })

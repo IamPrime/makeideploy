@@ -12,20 +12,51 @@ body {
 }
 
 :root {
-  --bg: #ffffff;
-  --text: #111111;
-  --muted: #4a4a4a;
-  --accent: #b4221b;
-  --btn-border: #a3a3a3;
-  --dark-modal-link: #FFD966;
+  /* The page's own ink, off the stage: the base for the body and the
+     Chrome modal. */
+  --paper-bg: #ffffff;
+  --paper-text: #111111;
+  --paper-muted: #4a4a4a;
+  --paper-line: #a3a3a3;
+
+  /* The two stages: the answer owns the whole page. Each set is measured
+     against its own ground: text, secondary text (>=4.5:1) and borders
+     (>=3:1). Keep in step with STAGE_COLORS in helpers/constants.ts. */
+  --yes-bg: #146c3a;     /* white 6.49:1 */
+  --yes-text: #ffffff;
+  --yes-muted: #c6efd5;  /* 5.16:1 */
+  --yes-line: #8fd6a9;   /* 3.82:1 */
+  --no-bg: #b4221b;      /* white 6.59:1 */
+  --no-text: #ffffff;
+  --no-muted: #ffd6d0;   /* 4.95:1 */
+  --no-line: #ffb3a8;    /* 3.85:1 */
 }
 
 body.dark {
-  --bg: #0b0f17;
-  --text: #e6eef8;
-  --muted: #9aa6b2;
-  --accent: #b4221b;
-  --btn-border: #9aa6b2;
+  --paper-bg: #0b0f17;
+  --paper-text: #e6eef8;
+  --paper-muted: #9aa6b2;
+  --paper-line: #9aa6b2;
+
+  /* Night stages: deeper grounds, tinted ink, same verdict. */
+  --yes-bg: #0e4429;
+  --yes-text: #eafbf0;   /* 10.42:1 */
+  --yes-muted: #9fdcb5;  /* 7.13:1 */
+  --yes-line: #5fb883;   /* 4.62:1 */
+  --no-bg: #7a1712;
+  --no-text: #fff1ef;    /* 9.74:1 */
+  --no-muted: #ffb8ae;   /* 6.49:1 */
+  --no-line: #f0776b;    /* 3.86:1 */
+}
+
+/* Colour roles. Set on body (not :root) so body.dark's paper applies; the
+   stages below remap them, and the Chrome modal sets them back. */
+body,
+.wrapper .modal-overlay {
+  --bg: var(--paper-bg);
+  --text: var(--paper-text);
+  --muted: var(--paper-muted);
+  --btn-border: var(--paper-line);
 }
 
 /*csslint box-sizing:false,universal-selector: false*/
@@ -127,29 +158,41 @@ a:active {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 0.7rem 1.6rem 0.6rem;
-  border: 2px solid currentColor;
   border-radius: 999px;
+  /* A solid stamp in the page's ink, lettered in the stage colour: green on
+     green for yes, red on red for no. Same contrast as the page text. */
+  color: var(--stage);
+  background: var(--text);
+  border: 2px solid var(--text);
 }
 
-/* Quiet yes: outlined in the page's text colour. */
-.verdict-yes {
-  color: var(--text);
+/* On a holiday the stamp carries the day's name, which can run long ("Feast
+   of the Sacrifice (Eid al-Adha)"). Let it wrap as a balanced block with
+   softer corners instead of a stretched pill. */
+.verdict-day {
+  max-width: min(42rem, calc(100vw - 4rem));
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-wrap: balance;
+  border-radius: 1.4rem;
 }
 
-/* Loud no: a solid white stamp with red lettering on the red page
-   (6.59:1 either way round). */
-.verdict-no {
-  color: var(--accent);
-  background: #ffffff;
-  border-color: #ffffff;
+/* Tick or cross before a holiday's name: the answer without colour. */
+.verdict-mark {
+  display: inline-block;
+  width: 0.95em;
+  height: 0.95em;
+  margin-inline-end: 0.45em;
+  vertical-align: -0.12em;
 }
 
 /* On phones the size tracks the viewport so whole words like "TOMORROW!"
    fit on one line. Most of the seven languages have no browser hyphenation
    dictionary, so word-break in .reason is only a last resort for genuinely
-   long words. */
+   long words. The floor is capped at 13vw too: with a large browser text
+   size, 4rem alone outgrew the screen and split "MONDAY" mid-word. */
 #text {
-  font: 900 clamp(4rem, 13vw, 6rem)/1.05 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  font: 900 clamp(min(4rem, 13vw), 13vw, 6rem)/1.05 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   color: var(--text);
   text-transform: uppercase;
@@ -179,14 +222,89 @@ a:active {
   cursor: pointer;
 }
 
-/* The Space hint sits alone under the reason. */
+/* Why the answer is what it is, and for which timezone. A quiet caption
+   under the reason in the hint's mono voice. The zone name is underlined
+   so it reads as changeable; "Use <city> time" is the one outlined chip,
+   shown only when the visitor's own zone differs. */
+.reason-why {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 0.8rem;
+  margin: 2.4rem auto 0;
+  padding: 0 2rem;
+  font: 400 1.4rem/1.4 SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  color: var(--muted);
+}
+
+.tz-link {
+  font: inherit;
+  font-weight: 600;
+  color: var(--text);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.tz-use {
+  font: inherit;
+  font-weight: 600;
+  color: var(--text);
+  background: transparent;
+  border: 1.5px solid currentColor;
+  border-radius: 6px;
+  padding: 0.4rem 1rem;
+  margin-left: 0.4rem;
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .tz-link:hover {
+    text-decoration-style: solid;
+  }
+  .tz-use:hover {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+  }
+}
+
+/* Small, short phones (iPhone SE class): a long reason plus the why-line
+   can push the footer out of view, so tighten the vertical rhythm. */
+@media (max-width: 400px) and (max-height: 700px) {
+  .tagline {
+    padding: 0;
+  }
+  .question {
+    margin-bottom: 1.2rem;
+  }
+  #text {
+    font-size: clamp(3.2rem, 11vw, 4.4rem);
+  }
+  .reason-why {
+    margin-top: 1.2rem;
+    row-gap: 0.2rem;
+  }
+  .actions {
+    margin-top: 1.2rem;
+  }
+}
+
+/* The Space hint sits under the why-line. */
 .actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 1.6rem 2.4rem;
-  margin-top: 4rem;
+  margin-top: 3.2rem;
   padding: 0 2rem;
 }
 
@@ -214,7 +332,8 @@ a:active {
   border-radius: 50%;
   background: var(--bg);
   color: var(--text);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
+  /* No drop shadow: grey haze muddies the coloured stage, and the ring
+     (>=3:1 on every stage) already sets the button apart. */
   cursor: pointer;
   transition: background-color 150ms ease-out, color 150ms ease-out;
 }
@@ -282,8 +401,12 @@ a:active {
   color: var(--text);
 }
 
+/* Selects speak the footer's mono voice, not the platform's default face. */
 .footer-list select {
+  font: inherit;
+  font-weight: 600;
   padding: 0.25rem 0.5rem;
+  border-radius: 4px;
   border: 1px solid var(--btn-border);
   background: var(--bg);
   color: var(--text);
@@ -320,12 +443,18 @@ a:active {
   padding: 0.4rem 0.8rem;
 }
 
+/* The sign is spaced with a margin, not a trailing space: on touch screens
+   the summary is a flex box and that space collapsed ("+For"). A fixed
+   width keeps the label still when + turns into −. */
 .footer-dev summary::before {
-  content: '+ ';
+  content: '+';
+  display: inline-block;
+  width: 1ch;
+  margin-inline-end: 0.6ch;
 }
 
 .footer-dev[open] summary::before {
-  content: '\2212 ';
+  content: '\2212';
 }
 
 .footer-dev summary::-webkit-details-marker {
@@ -347,8 +476,10 @@ ul.footer-list {
   margin-bottom: 1.5rem;
 }
 
+/* A block row inside the disclosure: it fills the line without the
+   width: 100% + padding that pushed it past a phone's edge. */
 ul.footer-list.footer-api {
-  width: 100%;
+  display: flex;
 }
 
 ul.footer-list li {
@@ -375,26 +506,19 @@ ul.footer-list a {
   font-weight: 600;
 }
 
-/* make buttons shown as links in footer match anchor styles */
-ul.footer-list .link-as-button {
-  background: transparent;
-  border: 0;
-  color: var(--text);
-  font-weight: 600;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-}
-
-/* ensure the button matches anchor text sizing and flow */
+/* The Chrome button reads as the link beside it ("Chrome | Edge"). */
 ul.footer-list .link-as-button {
   font: inherit;
-  line-height: inherit;
-  font-family: inherit;
-  font-size: inherit;
+  font-weight: 600;
+  color: var(--text);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
   display: inline;
   vertical-align: baseline;
-  text-decoration: none;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 ul.footer-list select {
@@ -406,15 +530,6 @@ ul.footer-list select.language-select {
   max-width: none;
 }
 
-.modal-text {
-  margin: 1.5em 1em auto;
-}
-
-.highlight {
-  background: rgba(193, 181, 17, 0.4);
-  padding: 0.08rem 0.25rem;
-  border-radius: 3px;
-}
 
 @media (min-width: 800px) {
   .tagline {
@@ -425,7 +540,7 @@ ul.footer-list select.language-select {
     font-size: 2rem;
   }
   #text {
-    font: 900 9rem/8.5rem -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    font: 900 min(9rem, 13vw)/0.95 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
       Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   }
 }
@@ -446,6 +561,9 @@ ul.footer-list select.language-select {
    ~390px tall. Size the answer by height so the question, reason, Share and
    footer all fit without scrolling. */
 @media (orientation: landscape) and (max-height: 500px) {
+  .reason-why {
+    margin-top: 0.6rem;
+  }
   .tagline {
     font-size: 2rem;
     line-height: 2.4rem;
@@ -459,7 +577,7 @@ ul.footer-list select.language-select {
     line-height: 1.05;
   }
   .actions {
-    margin-top: 1.6rem;
+    margin-top: 1.2rem;
   }
   .meta {
     padding-top: 0.6rem;
@@ -485,6 +603,8 @@ ul.footer-list select.language-select {
    control, whatever the viewport width. Mouse users keep the compact row. */
 @media (pointer: coarse) {
   #reload,
+  .tz-link,
+  .tz-use,
   .theme-btn,
   .footer-dev summary,
   ul.footer-list a,
@@ -518,84 +638,181 @@ ul.footer-list select.language-select {
   }
 }
 
-/* The "no" state. The red page remaps the colour roles instead of
-   overriding each element: white ink, red-tinted secondary text and
-   borders, all measured against #b4221b (text 6.59:1, secondary 4.95:1,
-   borders 3.85:1). */
-.its-friday {
-  --bg: var(--accent);
-  --text: #ffffff;
-  --muted: #ffd6d0;
-  --btn-border: #ffb3a8;
-  background-color: var(--accent);
+/* The stage. Green on a yes day, red on a no day: the page remaps its colour
+   roles instead of overriding each element, so every control, focus ring,
+   hover and the share button follow. Values and contrast live in :root. */
+.stage-yes {
+  --stage: var(--yes-bg);
+  --text: var(--yes-text);
+  --muted: var(--yes-muted);
+  --btn-border: var(--yes-line);
+}
+
+.stage-no {
+  --stage: var(--no-bg);
+  --text: var(--no-text);
+  --muted: var(--no-muted);
+  --btn-border: var(--no-line);
+}
+
+.stage-yes,
+.stage-no {
+  --bg: var(--stage);
+  background-color: var(--stage);
   color: var(--text);
 }
 
-/* The Chrome modal lives inside the wrapper; keep it on the page theme,
-   not the red. */
-.its-friday .modal-overlay {
-  --bg: #ffffff;
-  --text: #111111;
+/* Overscroll and the area behind the iOS toolbar show the body, so it takes
+   the stage too. */
+body:has(.stage-yes) {
+  background: var(--yes-bg);
 }
 
-body.dark .its-friday .modal-overlay {
-  --bg: #0b0f17;
-  --text: #e6eef8;
+body:has(.stage-no) {
+  background: var(--no-bg);
 }
 
-/* Modal styling to respect dark/light themes */
-.modal-overlay [role="dialog"] {
-  color: var(--text);
+/* Chrome install dialog: a short numbered how-to in the page theme's ink.
+   Centred card on wide screens, a bottom sheet on phones (thumb reach). */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.modal {
+  width: 100%;
+  max-width: 52rem;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 2.4rem 2.4rem 2.8rem;
+  border-radius: 12px;
   background: var(--bg);
+  color: var(--text);
+  text-align: start;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+  font: 400 1.6rem/1.55 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
 }
 
-.modal-overlay a {
+.modal p,
+.modal li {
+  line-height: 1.55;
+}
+
+.modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.6rem;
+}
+
+.modal-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-wrap: balance;
+  padding-top: 0.6rem;
+}
+
+.modal-close {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: -0.4rem -0.4rem 0 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .modal-close:hover {
+    background: color-mix(in srgb, var(--text) 10%, transparent);
+  }
+}
+
+.modal-lead {
+  margin-top: 0.8rem;
+  color: var(--muted);
+}
+
+/* Numbered steps: the number sits in a ring in the hint's mono voice. */
+.modal-steps {
+  counter-reset: step;
+  display: grid;
+  gap: 1.6rem;
+  margin: 2.4rem 0 0;
+}
+
+.modal-steps li {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 2.8rem minmax(0, 1fr);
+  column-gap: 1.2rem;
+  align-items: baseline;
+}
+
+.modal-steps li::before {
+  content: counter(step);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  border: 1.5px solid var(--btn-border);
+  border-radius: 50%;
+  font: 600 1.3rem/1 SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  /* Lines the number up with the first line of the step. */
+  transform: translateY(0.6rem);
+}
+
+.modal-foot {
+  margin-top: 2.4rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid color-mix(in srgb, var(--text) 15%, transparent);
+  color: var(--muted);
+}
+
+.modal a {
   color: var(--text);
   font-weight: 600;
-}
-
-.modal-overlay a:hover,
-.modal-overlay a:focus {
-  color: var(--text);
   text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
 }
 
-.modal-overlay button[aria-label="Close"] {
-  color: var(--text);
+.modal code {
+  font: 500 0.9em SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--text) 9%, transparent);
+  white-space: nowrap;
 }
 
-.modal-overlay code {
-  color: inherit;
-  padding: 0.08rem 0.25rem;
-  border-radius: 3px;
-  background: rgba(0,0,0,0.06);
-}
-
-body.dark .modal-overlay code {
-  background: rgba(255,255,255,0.06);
-}
-
-/* Force pure white text for modal contents in dark mode */
-/* In dark mode: normal modal text is white, links use ADA-friendly yellow */
-body.dark .modal-overlay [role="dialog"],
-body.dark .modal-overlay button[aria-label="Close"],
-body.dark .modal-overlay h3,
-body.dark .modal-overlay p,
-body.dark .modal-overlay li,
-body.dark .modal-overlay ol,
-body.dark .modal-overlay strong,
-body.dark .modal-overlay code {
-  color: #FFFFFF;
-}
-
-body.dark .modal-overlay a {
-  color: var(--dark-modal-link); /* warm yellow with strong contrast on dark bg */
-}
-
-/* Slightly brighten on hover/focus to help affordance */
-body.dark .modal-overlay a:hover,
-body.dark .modal-overlay a:focus {
-  color: #FFFFFF;
+@media screen and (max-width: 640px) {
+  .modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+  .modal {
+    max-width: none;
+    max-height: 88vh;
+    border-radius: 16px 16px 0 0;
+    padding-bottom: max(2.8rem, env(safe-area-inset-bottom));
+  }
 }
 
 .reason {
@@ -608,7 +825,7 @@ body.dark .modal-overlay a:focus {
 
 @media screen and (max-width: 400px) {
   .reason {
-    padding: 0 2rem;
+    padding: 0 min(2rem, 5vw);
   }
 }
 
@@ -622,7 +839,9 @@ body.dark .modal-overlay a:focus {
 :lang(am) #text,
 :lang(am) #reload,
 :lang(am) .meta,
-:lang(am) .share-toast {
+:lang(am) .share-toast,
+:lang(am) .reason-why,
+:lang(am) .modal {
   font-family: 'Noto Sans Ethiopic', 'Abyssinica SIL', Ebrima, Nyala, Kefa,
     -apple-system, 'Segoe UI', Roboto, sans-serif;
   letter-spacing: 0;
